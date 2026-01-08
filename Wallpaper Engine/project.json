@@ -1,287 +1,373 @@
 {
+	"contentrating" : "Everyone",
+	"description" : "项目的灵感来源于github上面的项目：\"breezy-weather\"和\"GeometricWeather\"（前者fork了后者持续在维护）这两个天气app的动态效果。\n\n该壁纸无网络请求，不会根据现实天气自动选择。只支持手动选择天气或者随机天气。\n\nWallpaper Engine里面标记了“每个天气单独生效”的设置只对当前作用的天气生效。比如当前桌面上显示的是晴，只对晴设置生效。由于Wallpaper Engine的设置页面是静态的，所以有时候会和当前桌面显示的天气不一致，此时更改Wallpaper Engine的设置会把Wallpaper Engine的设置进行同步。",
 	"file" : "index.html",
 	"general" : 
 	{
 		"properties" : 
 		{
+			"animate" : 
+			{
+				"index" : 20,
+				"order" : 120,
+				"text" : "ui_animate",
+				"type" : "bool",
+				"value" : true
+			},
+			"autotime" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "ui_auto_time",
+				"type" : "bool",
+				"value" : false
+			},
+			"autoweather" : 
+			{
+				"index" : 5,
+				"order" : 105,
+				"text" : "ui_auto_weather",
+				"type" : "bool",
+				"value" : false
+			},
+			"autoweatherclear" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 8,
+				"order" : 108,
+				"text" : "ui_auto_weather_clear",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathercloud" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 9,
+				"order" : 109,
+				"text" : "ui_auto_weather_cloud",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathercloudy" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 10,
+				"order" : 110,
+				"text" : "ui_auto_weather_cloudy",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherfog" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 11,
+				"order" : 111,
+				"text" : "ui_auto_weather_fog",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherhail" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 16,
+				"order" : 116,
+				"text" : "ui_auto_weather_hail",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherhaze" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 12,
+				"order" : 112,
+				"text" : "ui_auto_weather_haze",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherinterval" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 7,
+				"options" : 
+				[
+					{
+						"label" : "ui_interval_30s",
+						"value" : 0.5
+					},
+					{
+						"label" : "ui_interval_1m",
+						"value" : 1
+					},
+					{
+						"label" : "ui_interval_5m",
+						"value" : 5
+					},
+					{
+						"label" : "ui_interval_10m",
+						"value" : 10
+					},
+					{
+						"label" : "ui_interval_15m",
+						"value" : 15
+					},
+					{
+						"label" : "ui_interval_30m",
+						"value" : 30
+					},
+					{
+						"label" : "ui_interval_60m",
+						"value" : 60
+					}
+				],
+				"order" : 107,
+				"text" : "ui_auto_weather_interval",
+				"type" : "combo",
+				"value" : 5
+			},
+			"autoweatherrain" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 13,
+				"order" : 113,
+				"text" : "ui_auto_weather_rain",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathersleet" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 14,
+				"order" : 114,
+				"text" : "ui_auto_weather_sleet",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathersnow" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 15,
+				"order" : 115,
+				"text" : "ui_auto_weather_snow",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherthunder" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 17,
+				"order" : 117,
+				"text" : "ui_auto_weather_thunder",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherthunderstorm" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 18,
+				"order" : 118,
+				"text" : "ui_auto_weather_thunderstorm",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherwind" : 
+			{
+				"condition" : "autoweather.value == true",
+				"index" : 19,
+				"order" : 119,
+				"text" : "ui_auto_weather_wind",
+				"type" : "bool",
+				"value" : true
+			},
+			"clouddrift" : 
+			{
+				"condition" : "mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\"",
+				"index" : 23,
+				"order" : 123,
+				"text" : "ui_cloud_drift",
+				"type" : "bool",
+				"value" : true
+			},
+			"clouddriftdirection" : 
+			{
+				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
+				"index" : 24,
+				"options" : 
+				[
+					{
+						"label" : "ui_direction_left",
+						"value" : "left"
+					},
+					{
+						"label" : "ui_direction_right",
+						"value" : "right"
+					},
+					{
+						"label" : "ui_direction_random",
+						"value" : "random"
+					}
+				],
+				"order" : 124,
+				"text" : "ui_cloud_drift_direction",
+				"type" : "combo",
+				"value" : "random"
+			},
+			"clouddriftspeed" : 
+			{
+				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
+				"index" : 25,
+				"max" : 10,
+				"min" : 0,
+				"order" : 125,
+				"step" : 0.1,
+				"text" : "ui_cloud_drift_speed",
+				"type" : "slider",
+				"value" : 1
+			},
+			"dprlevel" : 
+			{
+				"index" : 32,
+				"options" : 
+				[
+					{
+						"label" : "ui_dpr_auto",
+						"value" : "auto"
+					},
+					{
+						"label" : "ui_dpr_2",
+						"value" : "2"
+					},
+					{
+						"label" : "ui_dpr_1_5",
+						"value" : "1.5"
+					},
+					{
+						"label" : "ui_dpr_1_25",
+						"value" : "1.25"
+					},
+					{
+						"label" : "ui_dpr_1",
+						"value" : "1"
+					},
+					{
+						"label" : "ui_dpr_0_75",
+						"value" : "0.75"
+					},
+					{
+						"label" : "ui_dpr_0_5",
+						"value" : "0.5"
+					}
+				],
+				"order" : 132,
+				"text" : "ui_dpr_level",
+				"type" : "combo",
+				"value" : "auto"
+			},
+			"flash" : 
+			{
+				"condition" : "mode.value == \"thunder\" || mode.value == \"thunderstorm\"",
+				"index" : 26,
+				"order" : 126,
+				"text" : "ui_flash",
+				"type" : "bool",
+				"value" : true
+			},
+			"fpslimit" : 
+			{
+				"index" : 31,
+				"options" : 
+				[
+					{
+						"label" : "ui_fps_auto",
+						"value" : 0
+					},
+					{
+						"label" : "ui_fps_30",
+						"value" : 30
+					},
+					{
+						"label" : "ui_fps_45",
+						"value" : 45
+					},
+					{
+						"label" : "ui_fps_60",
+						"value" : 60
+					},
+					{
+						"label" : "ui_fps_90",
+						"value" : 90
+					},
+					{
+						"label" : "ui_fps_120",
+						"value" : 120
+					},
+					{
+						"label" : "ui_fps_144",
+						"value" : 144
+					}
+				],
+				"order" : 131,
+				"text" : "ui_fps_limit",
+				"type" : "combo",
+				"value" : 0
+			},
 			"mode" : 
 			{
 				"index" : 0,
 				"options" : 
 				[
 					{
-						"label" : "晴",
+						"label" : "ui_weather_clear",
 						"value" : "clear"
 					},
 					{
-						"label" : "多云",
+						"label" : "ui_weather_cloud",
 						"value" : "cloud"
 					},
 					{
-						"label" : "阴",
+						"label" : "ui_weather_cloudy",
 						"value" : "cloudy"
 					},
 					{
-						"label" : "雾",
+						"label" : "ui_weather_fog",
 						"value" : "fog"
 					},
 					{
-						"label" : "霾",
+						"label" : "ui_weather_haze",
 						"value" : "haze"
 					},
 					{
-						"label" : "雨",
+						"label" : "ui_weather_rain",
 						"value" : "rain"
 					},
 					{
-						"label" : "雨夹雪",
+						"label" : "ui_weather_sleet",
 						"value" : "sleet"
 					},
 					{
-						"label" : "雪",
+						"label" : "ui_weather_snow",
 						"value" : "snow"
 					},
 					{
-						"label" : "冰雹",
+						"label" : "ui_weather_hail",
 						"value" : "hail"
 					},
 					{
-						"label" : "雷",
+						"label" : "ui_weather_thunder",
 						"value" : "thunder"
 					},
 					{
-						"label" : "雷暴",
+						"label" : "ui_weather_thunderstorm",
 						"value" : "thunderstorm"
 					},
 					{
-						"label" : "风",
+						"label" : "ui_weather_wind",
 						"value" : "wind"
 					}
 				],
 				"order" : 100,
-				"text" : "天气",
+				"text" : "ui_mode",
 				"type" : "combo",
 				"value" : "clear"
-			},
-			"timeofday" : 
-			{
-				"index" : 1,
-				"options" : 
-				[
-					{
-						"label" : "白天",
-						"value" : "day"
-					},
-					{
-						"label" : "夜晚",
-						"value" : "night"
-					}
-				],
-				"order" : 101,
-				"condition" : "autotime.value == false",
-				"text" : "昼夜模式",
-				"type" : "combo",
-				"value" : "day"
-			},
-			"autotime" : 
-			{
-				"index" : 2,
-				"order" : 102,
-				"text" : "自动切换昼夜（按照日出日落时间，自动显示昼夜的壁纸）",
-				"type" : "bool",
-				"value" : false
-			},
-			
-			"sunrisetime" : 
-			{
-				"index" : 4,
-				"order" : 104,
-				"condition" : "autotime.value == true",
-				"text" : "日出时间",
-				"type" : "textinput",
-				"value" : "06:00"
-			},
-			"sunsettime" : 
-			{
-				"index" : 5,
-				"order" : 105,
-				"condition" : "autotime.value == true",
-				"text" : "日落时间",
-				"type" : "textinput",
-				"value" : "18:00"
-			},
-			"autoweather" : 
-			{
-				"index" : 6,
-				"order" : 106,
-				"text" : "自动切换天气",
-				"type" : "bool",
-				"value" : false
-			},
-			"randomtime" : 
-			{
-				"index" : 3,
-				"order" : 103,
-				"condition" : "autoweather.value == true",
-				"text" : "随机切换昼夜（当自动切换天气打开时，随机选择昼夜中的天气）",
-				"type" : "bool",
-				"value" : false
-			},
-			"autoweatherinterval" : 
-			{
-				"index" : 7,
-				"options" : 
-				[
-					{
-						"label" : "30 秒",
-						"value" : 0.5
-					},
-					{
-						"label" : "1 分钟",
-						"value" : 1
-					},
-					{
-						"label" : "5 分钟",
-						"value" : 5
-					},
-					{
-						"label" : "10 分钟",
-						"value" : 10
-					},
-					{
-						"label" : "15 分钟",
-						"value" : 15
-					},
-					{
-						"label" : "30 分钟",
-						"value" : 30
-					},
-					{
-						"label" : "60 分钟",
-						"value" : 60
-					}
-				],
-				"order" : 107,
-				"condition" : "autoweather.value == true",
-				"text" : "切换间隔",
-				"type" : "combo",
-				"value" : 5
-			},
-			"autoweatherclear" : 
-			{
-				"index" : 8,
-				"order" : 108,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-晴",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweathercloud" : 
-			{
-				"index" : 9,
-				"order" : 109,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-多云",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweathercloudy" : 
-			{
-				"index" : 10,
-				"order" : 110,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-阴",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherfog" : 
-			{
-				"index" : 11,
-				"order" : 111,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雾",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherhaze" : 
-			{
-				"index" : 12,
-				"order" : 112,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-霾",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherrain" : 
-			{
-				"index" : 13,
-				"order" : 113,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雨",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweathersleet" : 
-			{
-				"index" : 14,
-				"order" : 114,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雨夹雪",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweathersnow" : 
-			{
-				"index" : 15,
-				"order" : 115,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雪",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherhail" : 
-			{
-				"index" : 16,
-				"order" : 116,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-冰雹",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherthunder" : 
-			{
-				"index" : 17,
-				"order" : 117,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雷",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherthunderstorm" : 
-			{
-				"index" : 18,
-				"order" : 118,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-雷暴",
-				"type" : "bool",
-				"value" : true
-			},
-			"autoweatherwind" : 
-			{
-				"index" : 19,
-				"order" : 119,
-				"condition" : "autoweather.value == true",
-				"text" : "自动范围-风",
-				"type" : "bool",
-				"value" : true
-			},
-			"animate" : 
-			{
-				"index" : 20,
-				"order" : 120,
-				"text" : "动画",
-				"type" : "bool",
-				"value" : true
 			},
 			"particledensity" : 
 			{
@@ -290,225 +376,16 @@
 				"min" : 0,
 				"order" : 121,
 				"step" : 0.1,
-				"text" : "粒子密度",
+				"text" : "ui_particle_density",
 				"type" : "slider",
 				"value" : 1
 			},
-			"speed" : 
+			"randomtime" : 
 			{
-				"index" : 22,
-				"max" : 5,
-				"min" : 0.25,
-				"order" : 122,
-				"step" : 0.05,
-				"text" : "速度缩放",
-				"type" : "slider",
-				"value" : 1
-			},
-			"clouddrift" : 
-			{
-				"index" : 23,
-				"order" : 123,
-				"condition" : "mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\"",
-				"text" : "云层移动",
-				"type" : "bool",
-				"value" : true
-			},
-			"clouddriftdirection" : 
-			{
-				"index" : 24,
-				"options" : 
-				[
-					{
-						"label" : "向左",
-						"value" : "left"
-					},
-					{
-						"label" : "向右",
-						"value" : "right"
-					},
-					{
-						"label" : "随机",
-						"value" : "random"
-					}
-				],
-				"order" : 124,
-				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
-				"text" : "云层移动方向",
-				"type" : "combo",
-				"value" : "random"
-			},
-			"clouddriftspeed" : 
-			{
-				"index" : 25,
-				"max" : 10,
-				"min" : 0,
-				"order" : 125,
-				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
-				"step" : 0.1,
-				"text" : "云层移动速度",
-				"type" : "slider",
-				"value" : 1
-			},
-			"flash" : 
-			{
-				"index" : 26,
-				"order" : 126,
-				"condition" : "mode.value == \"thunder\" || mode.value == \"thunderstorm\"",
-				"text" : "雷暴天气闪屏效果",
-				"type" : "bool",
-				"value" : true
-			},
-			"sunpos" : 
-			{
-				"index" : 27,
-				"options" : 
-				[
-					{
-						"label" : "左上角",
-						"value" : "left"
-					},
-					{
-						"label" : "上方中间",
-						"value" : "center"
-					},
-					{
-						"label" : "右上角",
-						"value" : "right"
-					}
-				],
-				"order" : 127,
-				"condition" : "mode.value == \"clear\"",
-				"text" : "太阳位置（晴）",
-				"type" : "combo",
-				"value" : "right"
-			},
-			"tilt" : 
-			{
-				"index" : 28,
-				"order" : 128,
-				"text" : "鼠标倾斜效果",
-				"type" : "bool",
-				"value" : false
-			},
-			"tiltx" : 
-			{
-				"index" : 29,
-				"max" : 2,
-				"min" : 0,
-				"order" : 129,
-				"condition" : "tilt.value == true",
-				"step" : 0.05,
-				"text" : "鼠标左右倾斜强度",
-				"type" : "slider",
-				"value" : 1
-			},
-			"tilty" : 
-			{
-				"index" : 30,
-				"max" : 2,
-				"min" : 0,
-				"order" : 130,
-				"condition" : "tilt.value == true",
-				"step" : 0.05,
-				"text" : "鼠标上下倾斜强度",
-				"type" : "slider",
-				"value" : 1
-			},
-			"fpslimit" : 
-			{
-				"index" : 31,
-				"options" : 
-				[
-					{
-						"label" : "自动",
-						"value" : 0
-					},
-					{
-						"label" : "30 FPS",
-						"value" : 30
-					},
-					{
-						"label" : "45 FPS",
-						"value" : 45
-					},
-					{
-						"label" : "60 FPS",
-						"value" : 60
-					},
-					{
-						"label" : "90 FPS",
-						"value" : 90
-					},
-					{
-						"label" : "120 FPS",
-						"value" : 120
-					},
-					{
-						"label" : "144 FPS",
-						"value" : 144
-					}
-				],
-				"order" : 131,
-				"text" : "帧率上限（自动模式跟随Wallpaper Engine的上限，固定值忽略Wallpaper Engine的上限设置）",
-				"type" : "combo",
-				"value" : 0
-			},
-			"dprlevel" : 
-			{
-				"index" : 32,
-				"options" : 
-				[
-					{
-						"label" : "自动",
-						"value" : "auto"
-					},
-					{
-						"label" : "2",
-						"value" : "2"
-					},
-					{
-						"label" : "1.5",
-						"value" : "1.5"
-					},
-					{
-						"label" : "1.25",
-						"value" : "1.25"
-					},
-					{
-						"label" : "1",
-						"value" : "1"
-					},
-					{
-						"label" : "0.75",
-						"value" : "0.75"
-					},
-					{
-						"label" : "0.5",
-						"value" : "0.5"
-					}
-				],
-				"order" : 132,
-				"text" : "DPR 档位（质量相关，自动模式清晰度最高，和分辨率和windows缩放系数有关。）",
-				"type" : "combo",
-				"value" : "auto"
-			},
-			"transitionms" : 
-			{
-				"index" : 33,
-				"max" : 4000,
-				"min" : 0,
-				"order" : 133,
-				"step" : 50,
-				"text" : "切换过渡时间",
-				"type" : "slider",
-				"value" : 800
-			},
-			"showfps" : 
-			{
-				"index" : 34,
-				"order" : 134,
-				"text" : "显示 FPS（在右上角显示动画的刷新频率）",
+				"condition" : "autoweather.value == true",
+				"index" : 6,
+				"order" : 106,
+				"text" : "ui_random_time",
 				"type" : "bool",
 				"value" : false
 			},
@@ -516,7 +393,7 @@
 			{
 				"index" : 35,
 				"order" : 135,
-				"text" : "清除本地存储（每点击一次就会清除网页的localStorage缓存）",
+				"text" : "ui_reset_storage",
 				"type" : "bool",
 				"value" : false
 			},
@@ -525,11 +402,871 @@
 				"order" : 0,
 				"text" : "ui_browse_properties_scheme_color",
 				"type" : "color",
-				"value" : "0 0 0"
+				"value" : "0.6784313725490196 0.8470588235294118 0.9019607843137255"
+			},
+			"showfps" : 
+			{
+				"index" : 34,
+				"order" : 134,
+				"text" : "ui_show_fps",
+				"type" : "bool",
+				"value" : false
+			},
+			"speed" : 
+			{
+				"index" : 22,
+				"max" : 5,
+				"min" : 0.25,
+				"order" : 122,
+				"step" : 0.05,
+				"text" : "ui_speed",
+				"type" : "slider",
+				"value" : 1
+			},
+			"sunpos" : 
+			{
+				"condition" : "mode.value == \"clear\"",
+				"index" : 27,
+				"options" : 
+				[
+					{
+						"label" : "ui_sun_left",
+						"value" : "left"
+					},
+					{
+						"label" : "ui_sun_center",
+						"value" : "center"
+					},
+					{
+						"label" : "ui_sun_right",
+						"value" : "right"
+					}
+				],
+				"order" : 127,
+				"text" : "ui_sun_pos",
+				"type" : "combo",
+				"value" : "right"
+			},
+			"sunrisetime" : 
+			{
+				"condition" : "autotime.value == true",
+				"index" : 3,
+				"order" : 103,
+				"text" : "ui_sunrise_time",
+				"type" : "textinput",
+				"value" : "06:00"
+			},
+			"sunsettime" : 
+			{
+				"condition" : "autotime.value == true",
+				"index" : 4,
+				"order" : 104,
+				"text" : "ui_sunset_time",
+				"type" : "textinput",
+				"value" : "18:00"
+			},
+			"tilt" : 
+			{
+				"index" : 28,
+				"order" : 128,
+				"text" : "ui_tilt",
+				"type" : "bool",
+				"value" : false
+			},
+			"tiltx" : 
+			{
+				"condition" : "tilt.value == true",
+				"index" : 29,
+				"max" : 2,
+				"min" : 0,
+				"order" : 129,
+				"step" : 0.05,
+				"text" : "ui_tilt_x",
+				"type" : "slider",
+				"value" : 1
+			},
+			"tilty" : 
+			{
+				"condition" : "tilt.value == true",
+				"index" : 30,
+				"max" : 2,
+				"min" : 0,
+				"order" : 130,
+				"step" : 0.05,
+				"text" : "ui_tilt_y",
+				"type" : "slider",
+				"value" : 1
+			},
+			"timeofday" : 
+			{
+				"condition" : "autotime.value == false",
+				"index" : 1,
+				"options" : 
+				[
+					{
+						"label" : "ui_time_day",
+						"value" : "day"
+					},
+					{
+						"label" : "ui_time_night",
+						"value" : "night"
+					}
+				],
+				"order" : 101,
+				"text" : "ui_time_of_day",
+				"type" : "combo",
+				"value" : "day"
+			},
+			"transitionms" : 
+			{
+				"index" : 33,
+				"max" : 4000,
+				"min" : 0,
+				"order" : 133,
+				"step" : 50,
+				"text" : "ui_transition_ms",
+				"type" : "slider",
+				"value" : 800
+			}
+		},
+		"localization" : 
+		{
+			"en-us" : 
+			{
+				"ui_animate" : "Animation",
+				"ui_auto_time" : "Auto day/night (based on sunrise/sunset)",
+				"ui_auto_weather" : "Auto weather",
+				"ui_auto_weather_clear" : "Auto range - Clear",
+				"ui_auto_weather_cloud" : "Auto range - Partly cloudy",
+				"ui_auto_weather_cloudy" : "Auto range - Cloudy",
+				"ui_auto_weather_fog" : "Auto range - Fog",
+				"ui_auto_weather_hail" : "Auto range - Hail",
+				"ui_auto_weather_haze" : "Auto range - Haze",
+				"ui_auto_weather_interval" : "Auto weather interval",
+				"ui_auto_weather_rain" : "Auto range - Rain",
+				"ui_auto_weather_sleet" : "Auto range - Sleet",
+				"ui_auto_weather_snow" : "Auto range - Snow",
+				"ui_auto_weather_thunder" : "Auto range - Thunder",
+				"ui_auto_weather_thunderstorm" : "Auto range - Thunderstorm",
+				"ui_auto_weather_wind" : "Auto range - Wind",
+				"ui_cloud_drift" : "Cloud drift (per weather)",
+				"ui_cloud_drift_direction" : "Cloud drift direction",
+				"ui_cloud_drift_speed" : "Cloud drift speed",
+				"ui_dpr_level" : "DPR level (quality; auto is sharpest)",
+				"ui_flash" : "Thunder flash",
+				"ui_fps_limit" : "FPS limit (auto uses Wallpaper Engine)",
+				"ui_mode" : "Weather",
+				"ui_particle_density" : "Particle density (per weather)",
+				"ui_random_time" : "Random day/night when auto weather",
+				"ui_reset_storage" : "Clear local storage",
+				"ui_show_fps" : "Show FPS",
+				"ui_speed" : "Speed scale (per weather)",
+				"ui_sun_pos" : "Sun position (clear)",
+				"ui_sunrise_time" : "Sunrise time",
+				"ui_sunset_time" : "Sunset time",
+				"ui_tilt" : "Mouse tilt",
+				"ui_tilt_x" : "Horizontal tilt strength",
+				"ui_tilt_y" : "Vertical tilt strength",
+				"ui_time_of_day" : "Day/Night",
+				"ui_transition_ms" : "Transition duration",
+				"ui_interval_30s" : "30 seconds",
+				"ui_interval_1m" : "1 minute",
+				"ui_interval_5m" : "5 minutes",
+				"ui_interval_10m" : "10 minutes",
+				"ui_interval_15m" : "15 minutes",
+				"ui_interval_30m" : "30 minutes",
+				"ui_interval_60m" : "60 minutes",
+				"ui_direction_left" : "Left",
+				"ui_direction_right" : "Right",
+				"ui_direction_random" : "Random",
+				"ui_auto" : "Auto",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "Clear",
+				"ui_weather_cloud" : "Partly cloudy",
+				"ui_weather_cloudy" : "Cloudy",
+				"ui_weather_fog" : "Fog",
+				"ui_weather_haze" : "Haze",
+				"ui_weather_rain" : "Rain",
+				"ui_weather_sleet" : "Sleet",
+				"ui_weather_snow" : "Snow",
+				"ui_weather_hail" : "Hail",
+				"ui_weather_thunder" : "Thunder",
+				"ui_weather_thunderstorm" : "Thunderstorm",
+				"ui_weather_wind" : "Wind",
+				"ui_sun_left" : "Top-left",
+				"ui_sun_center" : "Top-center",
+				"ui_sun_right" : "Top-right",
+				"ui_time_day" : "Day",
+				"ui_time_night" : "Night",
+				"ui_dpr_auto" : "Auto",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "Auto"
+			},
+			"zh-chs" : 
+			{
+				"ui_animate" : "动画开关",
+				"ui_auto_time" : "自动切换昼夜（按照日出日落时间，自动切换昼夜模式）",
+				"ui_auto_weather" : "自动切换天气",
+				"ui_auto_weather_clear" : "自动范围-晴",
+				"ui_auto_weather_cloud" : "自动范围-多云",
+				"ui_auto_weather_cloudy" : "自动范围-阴",
+				"ui_auto_weather_fog" : "自动范围-雾",
+				"ui_auto_weather_hail" : "自动范围-冰雹",
+				"ui_auto_weather_haze" : "自动范围-霾",
+				"ui_auto_weather_interval" : "自动切换天气的间隔",
+				"ui_auto_weather_rain" : "自动范围-雨",
+				"ui_auto_weather_sleet" : "自动范围-雨夹雪",
+				"ui_auto_weather_snow" : "自动范围-雪",
+				"ui_auto_weather_thunder" : "自动范围-雷",
+				"ui_auto_weather_thunderstorm" : "自动范围-雷暴",
+				"ui_auto_weather_wind" : "自动范围-风",
+				"ui_cloud_drift" : "云层移动（每个天气单独生效）",
+				"ui_cloud_drift_direction" : "云层移动方向",
+				"ui_cloud_drift_speed" : "云层移动速度",
+				"ui_dpr_level" : "DPR 档位（质量相关，自动模式清晰度最高，和分辨率和windows缩放系数有关。）",
+				"ui_flash" : "雷暴天气闪屏效果",
+				"ui_fps_limit" : "帧率上限（自动模式跟随Wallpaper Engine的上限，固定值忽略Wallpaper Engine的上限设置）",
+				"ui_mode" : "天气",
+				"ui_particle_density" : "粒子密度（每个天气单独生效）",
+				"ui_random_time" : "随机切换昼夜（当自动切换天气打开时，随机选择白天或夜晚中的天气）",
+				"ui_reset_storage" : "清除本地存储（每点击一次就会清除网页的localStorage缓存）",
+				"ui_show_fps" : "显示 FPS（在右上角显示动画的渲染频率）",
+				"ui_speed" : "速度缩放（每个天气单独生效）",
+				"ui_sun_pos" : "太阳位置（晴）",
+				"ui_sunrise_time" : "日出时间",
+				"ui_sunset_time" : "日落时间",
+				"ui_tilt" : "鼠标倾斜效果",
+				"ui_tilt_x" : "鼠标左右倾斜强度",
+				"ui_tilt_y" : "鼠标上下倾斜强度",
+				"ui_time_of_day" : "昼夜模式",
+				"ui_transition_ms" : "天气切换过渡时间",
+				"ui_interval_30s" : "30 秒",
+				"ui_interval_1m" : "1 分钟",
+				"ui_interval_5m" : "5 分钟",
+				"ui_interval_10m" : "10 分钟",
+				"ui_interval_15m" : "15 分钟",
+				"ui_interval_30m" : "30 分钟",
+				"ui_interval_60m" : "60 分钟",
+				"ui_direction_left" : "向左",
+				"ui_direction_right" : "向右",
+				"ui_direction_random" : "随机",
+				"ui_auto" : "自动",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "晴",
+				"ui_weather_cloud" : "多云",
+				"ui_weather_cloudy" : "阴",
+				"ui_weather_fog" : "雾",
+				"ui_weather_haze" : "霾",
+				"ui_weather_rain" : "雨",
+				"ui_weather_sleet" : "雨夹雪",
+				"ui_weather_snow" : "雪",
+				"ui_weather_hail" : "冰雹",
+				"ui_weather_thunder" : "雷",
+				"ui_weather_thunderstorm" : "雷暴",
+				"ui_weather_wind" : "风",
+				"ui_sun_left" : "左上角",
+				"ui_sun_center" : "上方中间",
+				"ui_sun_right" : "右上角",
+				"ui_time_day" : "白天",
+				"ui_time_night" : "夜晚",
+				"ui_dpr_auto" : "自动",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "自动"
+			},
+			"zh-cht" : 
+			{
+				"ui_animate" : "動畫開關",
+				"ui_auto_time" : "自動切換晝夜（依日出日落時間切換晝夜模式）",
+				"ui_auto_weather" : "自動切換天氣",
+				"ui_auto_weather_clear" : "自動範圍-晴",
+				"ui_auto_weather_cloud" : "自動範圍-多雲",
+				"ui_auto_weather_cloudy" : "自動範圍-陰",
+				"ui_auto_weather_fog" : "自動範圍-霧",
+				"ui_auto_weather_hail" : "自動範圍-冰雹",
+				"ui_auto_weather_haze" : "自動範圍-霾",
+				"ui_auto_weather_interval" : "自動切換天氣的間隔",
+				"ui_auto_weather_rain" : "自動範圍-雨",
+				"ui_auto_weather_sleet" : "自動範圍-雨夾雪",
+				"ui_auto_weather_snow" : "自動範圍-雪",
+				"ui_auto_weather_thunder" : "自動範圍-雷",
+				"ui_auto_weather_thunderstorm" : "自動範圍-雷暴",
+				"ui_auto_weather_wind" : "自動範圍-風",
+				"ui_cloud_drift" : "雲層移動（每個天氣單獨生效）",
+				"ui_cloud_drift_direction" : "雲層移動方向",
+				"ui_cloud_drift_speed" : "雲層移動速度",
+				"ui_dpr_level" : "DPR 檔位（品質相關，自動模式最清晰）",
+				"ui_flash" : "雷暴天氣閃屏效果",
+				"ui_fps_limit" : "幀率上限（自動模式跟隨 Wallpaper Engine）",
+				"ui_mode" : "天氣",
+				"ui_particle_density" : "粒子密度（每個天氣單獨生效）",
+				"ui_random_time" : "自動天氣時隨機晝夜",
+				"ui_reset_storage" : "清除本地儲存",
+				"ui_show_fps" : "顯示 FPS",
+				"ui_speed" : "速度縮放（每個天氣單獨生效）",
+				"ui_sun_pos" : "太陽位置（晴）",
+				"ui_sunrise_time" : "日出時間",
+				"ui_sunset_time" : "日落時間",
+				"ui_tilt" : "滑鼠傾斜效果",
+				"ui_tilt_x" : "左右傾斜強度",
+				"ui_tilt_y" : "上下傾斜強度",
+				"ui_time_of_day" : "晝夜模式",
+				"ui_transition_ms" : "天氣切換過渡時間",
+				"ui_interval_30s" : "30 秒",
+				"ui_interval_1m" : "1 分鐘",
+				"ui_interval_5m" : "5 分鐘",
+				"ui_interval_10m" : "10 分鐘",
+				"ui_interval_15m" : "15 分鐘",
+				"ui_interval_30m" : "30 分鐘",
+				"ui_interval_60m" : "60 分鐘",
+				"ui_direction_left" : "向左",
+				"ui_direction_right" : "向右",
+				"ui_direction_random" : "隨機",
+				"ui_auto" : "自動",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "晴",
+				"ui_weather_cloud" : "多雲",
+				"ui_weather_cloudy" : "陰",
+				"ui_weather_fog" : "霧",
+				"ui_weather_haze" : "霾",
+				"ui_weather_rain" : "雨",
+				"ui_weather_sleet" : "雨夾雪",
+				"ui_weather_snow" : "雪",
+				"ui_weather_hail" : "冰雹",
+				"ui_weather_thunder" : "雷",
+				"ui_weather_thunderstorm" : "雷暴",
+				"ui_weather_wind" : "風",
+				"ui_sun_left" : "左上角",
+				"ui_sun_center" : "上方中間",
+				"ui_sun_right" : "右上角",
+				"ui_time_day" : "白天",
+				"ui_time_night" : "夜晚",
+				"ui_dpr_auto" : "自動",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "自動"
+			},
+			"ja-jp" : 
+			{
+				"ui_animate" : "アニメーション",
+				"ui_auto_time" : "日の出/日の入りに合わせて昼夜を自動切替",
+				"ui_auto_weather" : "天気を自動切替",
+				"ui_auto_weather_clear" : "自動範囲 - 晴れ",
+				"ui_auto_weather_cloud" : "自動範囲 - 晴れ時々曇り",
+				"ui_auto_weather_cloudy" : "自動範囲 - 曇り",
+				"ui_auto_weather_fog" : "自動範囲 - 霧",
+				"ui_auto_weather_hail" : "自動範囲 - 雹",
+				"ui_auto_weather_haze" : "自動範囲 - もや",
+				"ui_auto_weather_interval" : "天気の自動切替間隔",
+				"ui_auto_weather_rain" : "自動範囲 - 雨",
+				"ui_auto_weather_sleet" : "自動範囲 - みぞれ",
+				"ui_auto_weather_snow" : "自動範囲 - 雪",
+				"ui_auto_weather_thunder" : "自動範囲 - 雷",
+				"ui_auto_weather_thunderstorm" : "自動範囲 - 雷雨",
+				"ui_auto_weather_wind" : "自動範囲 - 風",
+				"ui_cloud_drift" : "雲の移動（天気ごと）",
+				"ui_cloud_drift_direction" : "雲の移動方向",
+				"ui_cloud_drift_speed" : "雲の移動速度",
+				"ui_dpr_level" : "DPR レベル（画質）",
+				"ui_flash" : "雷のフラッシュ",
+				"ui_fps_limit" : "FPS 上限（自動は Wallpaper Engine に従う）",
+				"ui_mode" : "天気",
+				"ui_particle_density" : "パーティクル密度（天気ごと）",
+				"ui_random_time" : "自動天気時に昼夜をランダム",
+				"ui_reset_storage" : "ローカルストレージをクリア",
+				"ui_show_fps" : "FPS を表示",
+				"ui_speed" : "速度スケール（天気ごと）",
+				"ui_sun_pos" : "太陽の位置（晴れ）",
+				"ui_sunrise_time" : "日の出時刻",
+				"ui_sunset_time" : "日の入り時刻",
+				"ui_tilt" : "マウス傾き効果",
+				"ui_tilt_x" : "左右の傾き強度",
+				"ui_tilt_y" : "上下の傾き強度",
+				"ui_time_of_day" : "昼/夜",
+				"ui_transition_ms" : "切替の遷移時間",
+				"ui_interval_30s" : "30 秒",
+				"ui_interval_1m" : "1 分",
+				"ui_interval_5m" : "5 分",
+				"ui_interval_10m" : "10 分",
+				"ui_interval_15m" : "15 分",
+				"ui_interval_30m" : "30 分",
+				"ui_interval_60m" : "60 分",
+				"ui_direction_left" : "左",
+				"ui_direction_right" : "右",
+				"ui_direction_random" : "ランダム",
+				"ui_auto" : "自動",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "晴れ",
+				"ui_weather_cloud" : "晴れ時々曇り",
+				"ui_weather_cloudy" : "曇り",
+				"ui_weather_fog" : "霧",
+				"ui_weather_haze" : "もや",
+				"ui_weather_rain" : "雨",
+				"ui_weather_sleet" : "みぞれ",
+				"ui_weather_snow" : "雪",
+				"ui_weather_hail" : "雹",
+				"ui_weather_thunder" : "雷",
+				"ui_weather_thunderstorm" : "雷雨",
+				"ui_weather_wind" : "風",
+				"ui_sun_left" : "左上",
+				"ui_sun_center" : "上中央",
+				"ui_sun_right" : "右上",
+				"ui_time_day" : "昼",
+				"ui_time_night" : "夜",
+				"ui_dpr_auto" : "自動",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "自動"
+			},
+			"ko-kr" : 
+			{
+				"ui_animate" : "애니메이션",
+				"ui_auto_time" : "일출/일몰에 따라 주야 자동 전환",
+				"ui_auto_weather" : "날씨 자동 전환",
+				"ui_auto_weather_clear" : "자동 범위-맑음",
+				"ui_auto_weather_cloud" : "자동 범위-구름 조금",
+				"ui_auto_weather_cloudy" : "자동 범위-흐림",
+				"ui_auto_weather_fog" : "자동 범위-안개",
+				"ui_auto_weather_hail" : "자동 범위-우박",
+				"ui_auto_weather_haze" : "자동 범위-연무",
+				"ui_auto_weather_interval" : "날씨 자동 전환 간격",
+				"ui_auto_weather_rain" : "자동 범위-비",
+				"ui_auto_weather_sleet" : "자동 범위-진눈깨비",
+				"ui_auto_weather_snow" : "자동 범위-눈",
+				"ui_auto_weather_thunder" : "자동 범위-천둥",
+				"ui_auto_weather_thunderstorm" : "자동 범위-뇌우",
+				"ui_auto_weather_wind" : "자동 범위-바람",
+				"ui_cloud_drift" : "구름 이동(날씨별)",
+				"ui_cloud_drift_direction" : "구름 이동 방향",
+				"ui_cloud_drift_speed" : "구름 이동 속도",
+				"ui_dpr_level" : "DPR 레벨(품질)",
+				"ui_flash" : "번개 플래시",
+				"ui_fps_limit" : "FPS 제한(자동은 Wallpaper Engine)",
+				"ui_mode" : "날씨",
+				"ui_particle_density" : "파티클 밀도(날씨별)",
+				"ui_random_time" : "자동 날씨 시 주야 랜덤",
+				"ui_reset_storage" : "로컬 저장소 초기화",
+				"ui_show_fps" : "FPS 표시",
+				"ui_speed" : "속도 배율(날씨별)",
+				"ui_sun_pos" : "태양 위치(맑음)",
+				"ui_sunrise_time" : "일출 시간",
+				"ui_sunset_time" : "일몰 시간",
+				"ui_tilt" : "마우스 기울기",
+				"ui_tilt_x" : "좌우 기울기 강도",
+				"ui_tilt_y" : "상하 기울기 강도",
+				"ui_time_of_day" : "주간/야간",
+				"ui_transition_ms" : "전환 시간",
+				"ui_interval_30s" : "30초",
+				"ui_interval_1m" : "1분",
+				"ui_interval_5m" : "5분",
+				"ui_interval_10m" : "10분",
+				"ui_interval_15m" : "15분",
+				"ui_interval_30m" : "30분",
+				"ui_interval_60m" : "60분",
+				"ui_direction_left" : "왼쪽",
+				"ui_direction_right" : "오른쪽",
+				"ui_direction_random" : "랜덤",
+				"ui_auto" : "자동",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "맑음",
+				"ui_weather_cloud" : "구름 조금",
+				"ui_weather_cloudy" : "흐림",
+				"ui_weather_fog" : "안개",
+				"ui_weather_haze" : "연무",
+				"ui_weather_rain" : "비",
+				"ui_weather_sleet" : "진눈깨비",
+				"ui_weather_snow" : "눈",
+				"ui_weather_hail" : "우박",
+				"ui_weather_thunder" : "천둥",
+				"ui_weather_thunderstorm" : "뇌우",
+				"ui_weather_wind" : "바람",
+				"ui_sun_left" : "왼쪽 위",
+				"ui_sun_center" : "위쪽 중앙",
+				"ui_sun_right" : "오른쪽 위",
+				"ui_time_day" : "주간",
+				"ui_time_night" : "야간",
+				"ui_dpr_auto" : "자동",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "자동"
+			},
+			"fr-fr" : 
+			{
+				"ui_animate" : "Animation",
+				"ui_auto_time" : "Jour/nuit auto (lever/coucher du soleil)",
+				"ui_auto_weather" : "Météo automatique",
+				"ui_auto_weather_clear" : "Plage auto - Clair",
+				"ui_auto_weather_cloud" : "Plage auto - Partiellement nuageux",
+				"ui_auto_weather_cloudy" : "Plage auto - Nuageux",
+				"ui_auto_weather_fog" : "Plage auto - Brouillard",
+				"ui_auto_weather_hail" : "Plage auto - Grêle",
+				"ui_auto_weather_haze" : "Plage auto - Brume",
+				"ui_auto_weather_interval" : "Intervalle de météo auto",
+				"ui_auto_weather_rain" : "Plage auto - Pluie",
+				"ui_auto_weather_sleet" : "Plage auto - Neige fondue",
+				"ui_auto_weather_snow" : "Plage auto - Neige",
+				"ui_auto_weather_thunder" : "Plage auto - Tonnerre",
+				"ui_auto_weather_thunderstorm" : "Plage auto - Orage",
+				"ui_auto_weather_wind" : "Plage auto - Vent",
+				"ui_cloud_drift" : "Dérive des nuages (par météo)",
+				"ui_cloud_drift_direction" : "Direction de dérive des nuages",
+				"ui_cloud_drift_speed" : "Vitesse de dérive des nuages",
+				"ui_dpr_level" : "Niveau DPR (qualité)",
+				"ui_flash" : "Éclair",
+				"ui_fps_limit" : "Limite FPS (auto suit Wallpaper Engine)",
+				"ui_mode" : "Météo",
+				"ui_particle_density" : "Densité de particules (par météo)",
+				"ui_random_time" : "Jour/nuit aléatoire en météo auto",
+				"ui_reset_storage" : "Effacer le stockage local",
+				"ui_show_fps" : "Afficher les FPS",
+				"ui_speed" : "Vitesse (par météo)",
+				"ui_sun_pos" : "Position du soleil (clair)",
+				"ui_sunrise_time" : "Heure du lever",
+				"ui_sunset_time" : "Heure du coucher",
+				"ui_tilt" : "Inclinaison de la souris",
+				"ui_tilt_x" : "Intensité horizontale",
+				"ui_tilt_y" : "Intensité verticale",
+				"ui_time_of_day" : "Jour/Nuit",
+				"ui_transition_ms" : "Durée de transition",
+				"ui_interval_30s" : "30 secondes",
+				"ui_interval_1m" : "1 minute",
+				"ui_interval_5m" : "5 minutes",
+				"ui_interval_10m" : "10 minutes",
+				"ui_interval_15m" : "15 minutes",
+				"ui_interval_30m" : "30 minutes",
+				"ui_interval_60m" : "60 minutes",
+				"ui_direction_left" : "Gauche",
+				"ui_direction_right" : "Droite",
+				"ui_direction_random" : "Aléatoire",
+				"ui_auto" : "Auto",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "Clair",
+				"ui_weather_cloud" : "Partiellement nuageux",
+				"ui_weather_cloudy" : "Nuageux",
+				"ui_weather_fog" : "Brouillard",
+				"ui_weather_haze" : "Brume",
+				"ui_weather_rain" : "Pluie",
+				"ui_weather_sleet" : "Neige fondue",
+				"ui_weather_snow" : "Neige",
+				"ui_weather_hail" : "Grêle",
+				"ui_weather_thunder" : "Tonnerre",
+				"ui_weather_thunderstorm" : "Orage",
+				"ui_weather_wind" : "Vent",
+				"ui_sun_left" : "Haut gauche",
+				"ui_sun_center" : "Haut centre",
+				"ui_sun_right" : "Haut droite",
+				"ui_time_day" : "Jour",
+				"ui_time_night" : "Nuit",
+				"ui_dpr_auto" : "Auto",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "Auto"
+			},
+			"de-de" : 
+			{
+				"ui_animate" : "Animation",
+				"ui_auto_time" : "Tag/Nacht automatisch (Sonnenauf-/untergang)",
+				"ui_auto_weather" : "Wetter automatisch",
+				"ui_auto_weather_clear" : "Auto-Bereich - Klar",
+				"ui_auto_weather_cloud" : "Auto-Bereich - Teilweise bewölkt",
+				"ui_auto_weather_cloudy" : "Auto-Bereich - Bewölkt",
+				"ui_auto_weather_fog" : "Auto-Bereich - Nebel",
+				"ui_auto_weather_hail" : "Auto-Bereich - Hagel",
+				"ui_auto_weather_haze" : "Auto-Bereich - Dunst",
+				"ui_auto_weather_interval" : "Intervall für Auto-Wetter",
+				"ui_auto_weather_rain" : "Auto-Bereich - Regen",
+				"ui_auto_weather_sleet" : "Auto-Bereich - Schneeregen",
+				"ui_auto_weather_snow" : "Auto-Bereich - Schnee",
+				"ui_auto_weather_thunder" : "Auto-Bereich - Donner",
+				"ui_auto_weather_thunderstorm" : "Auto-Bereich - Gewitter",
+				"ui_auto_weather_wind" : "Auto-Bereich - Wind",
+				"ui_cloud_drift" : "Wolkenbewegung (pro Wetter)",
+				"ui_cloud_drift_direction" : "Richtung der Wolkenbewegung",
+				"ui_cloud_drift_speed" : "Geschwindigkeit der Wolkenbewegung",
+				"ui_dpr_level" : "DPR-Stufe (Qualität)",
+				"ui_flash" : "Blitz",
+				"ui_fps_limit" : "FPS-Limit (auto folgt Wallpaper Engine)",
+				"ui_mode" : "Wetter",
+				"ui_particle_density" : "Partikeldichte (pro Wetter)",
+				"ui_random_time" : "Zufällige Tag/Nacht bei Auto-Wetter",
+				"ui_reset_storage" : "Lokalen Speicher löschen",
+				"ui_show_fps" : "FPS anzeigen",
+				"ui_speed" : "Geschwindigkeit (pro Wetter)",
+				"ui_sun_pos" : "Sonnenposition (klar)",
+				"ui_sunrise_time" : "Sonnenaufgang",
+				"ui_sunset_time" : "Sonnenuntergang",
+				"ui_tilt" : "Mausneigung",
+				"ui_tilt_x" : "Horizontale Neigung",
+				"ui_tilt_y" : "Vertikale Neigung",
+				"ui_time_of_day" : "Tag/Nacht",
+				"ui_transition_ms" : "Übergangszeit",
+				"ui_interval_30s" : "30 Sekunden",
+				"ui_interval_1m" : "1 Minute",
+				"ui_interval_5m" : "5 Minuten",
+				"ui_interval_10m" : "10 Minuten",
+				"ui_interval_15m" : "15 Minuten",
+				"ui_interval_30m" : "30 Minuten",
+				"ui_interval_60m" : "60 Minuten",
+				"ui_direction_left" : "Links",
+				"ui_direction_right" : "Rechts",
+				"ui_direction_random" : "Zufällig",
+				"ui_auto" : "Auto",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "Klar",
+				"ui_weather_cloud" : "Teilweise bewölkt",
+				"ui_weather_cloudy" : "Bewölkt",
+				"ui_weather_fog" : "Nebel",
+				"ui_weather_haze" : "Dunst",
+				"ui_weather_rain" : "Regen",
+				"ui_weather_sleet" : "Schneeregen",
+				"ui_weather_snow" : "Schnee",
+				"ui_weather_hail" : "Hagel",
+				"ui_weather_thunder" : "Donner",
+				"ui_weather_thunderstorm" : "Gewitter",
+				"ui_weather_wind" : "Wind",
+				"ui_sun_left" : "Oben links",
+				"ui_sun_center" : "Oben Mitte",
+				"ui_sun_right" : "Oben rechts",
+				"ui_time_day" : "Tag",
+				"ui_time_night" : "Nacht",
+				"ui_dpr_auto" : "Auto",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "Auto"
+			},
+			"es-es" : 
+			{
+				"ui_animate" : "Animación",
+				"ui_auto_time" : "Día/noche automático (amanecer/atardecer)",
+				"ui_auto_weather" : "Clima automático",
+				"ui_auto_weather_clear" : "Rango auto - Despejado",
+				"ui_auto_weather_cloud" : "Rango auto - Parcialmente nublado",
+				"ui_auto_weather_cloudy" : "Rango auto - Nublado",
+				"ui_auto_weather_fog" : "Rango auto - Niebla",
+				"ui_auto_weather_hail" : "Rango auto - Granizo",
+				"ui_auto_weather_haze" : "Rango auto - Calima",
+				"ui_auto_weather_interval" : "Intervalo de clima automático",
+				"ui_auto_weather_rain" : "Rango auto - Lluvia",
+				"ui_auto_weather_sleet" : "Rango auto - Aguanieve",
+				"ui_auto_weather_snow" : "Rango auto - Nieve",
+				"ui_auto_weather_thunder" : "Rango auto - Trueno",
+				"ui_auto_weather_thunderstorm" : "Rango auto - Tormenta",
+				"ui_auto_weather_wind" : "Rango auto - Viento",
+				"ui_cloud_drift" : "Desplazamiento de nubes (por clima)",
+				"ui_cloud_drift_direction" : "Dirección del desplazamiento de nubes",
+				"ui_cloud_drift_speed" : "Velocidad del desplazamiento de nubes",
+				"ui_dpr_level" : "Nivel DPR (calidad)",
+				"ui_flash" : "Destello de trueno",
+				"ui_fps_limit" : "Límite de FPS (auto usa Wallpaper Engine)",
+				"ui_mode" : "Clima",
+				"ui_particle_density" : "Densidad de partículas (por clima)",
+				"ui_random_time" : "Día/noche aleatorio con clima automático",
+				"ui_reset_storage" : "Borrar almacenamiento local",
+				"ui_show_fps" : "Mostrar FPS",
+				"ui_speed" : "Escala de velocidad (por clima)",
+				"ui_sun_pos" : "Posición del sol (despejado)",
+				"ui_sunrise_time" : "Hora del amanecer",
+				"ui_sunset_time" : "Hora del atardecer",
+				"ui_tilt" : "Inclinación del ratón",
+				"ui_tilt_x" : "Intensidad horizontal",
+				"ui_tilt_y" : "Intensidad vertical",
+				"ui_time_of_day" : "Día/Noche",
+				"ui_transition_ms" : "Duración de transición",
+				"ui_interval_30s" : "30 segundos",
+				"ui_interval_1m" : "1 minuto",
+				"ui_interval_5m" : "5 minutos",
+				"ui_interval_10m" : "10 minutos",
+				"ui_interval_15m" : "15 minutos",
+				"ui_interval_30m" : "30 minutos",
+				"ui_interval_60m" : "60 minutos",
+				"ui_direction_left" : "Izquierda",
+				"ui_direction_right" : "Derecha",
+				"ui_direction_random" : "Aleatorio",
+				"ui_auto" : "Auto",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "Despejado",
+				"ui_weather_cloud" : "Parcialmente nublado",
+				"ui_weather_cloudy" : "Nublado",
+				"ui_weather_fog" : "Niebla",
+				"ui_weather_haze" : "Calima",
+				"ui_weather_rain" : "Lluvia",
+				"ui_weather_sleet" : "Aguanieve",
+				"ui_weather_snow" : "Nieve",
+				"ui_weather_hail" : "Granizo",
+				"ui_weather_thunder" : "Trueno",
+				"ui_weather_thunderstorm" : "Tormenta",
+				"ui_weather_wind" : "Viento",
+				"ui_sun_left" : "Arriba izquierda",
+				"ui_sun_center" : "Arriba centro",
+				"ui_sun_right" : "Arriba derecha",
+				"ui_time_day" : "Día",
+				"ui_time_night" : "Noche",
+				"ui_dpr_auto" : "Auto",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "Auto"
+			},
+			"ru-ru" : 
+			{
+				"ui_animate" : "Анимация",
+				"ui_auto_time" : "Авто день/ночь (восход/закат)",
+				"ui_auto_weather" : "Авто погода",
+				"ui_auto_weather_clear" : "Авто диапазон - Ясно",
+				"ui_auto_weather_cloud" : "Авто диапазон - Переменная облачность",
+				"ui_auto_weather_cloudy" : "Авто диапазон - Облачно",
+				"ui_auto_weather_fog" : "Авто диапазон - Туман",
+				"ui_auto_weather_hail" : "Авто диапазон - Град",
+				"ui_auto_weather_haze" : "Авто диапазон - Дымка",
+				"ui_auto_weather_interval" : "Интервал авто погоды",
+				"ui_auto_weather_rain" : "Авто диапазон - Дождь",
+				"ui_auto_weather_sleet" : "Авто диапазон - Мокрый снег",
+				"ui_auto_weather_snow" : "Авто диапазон - Снег",
+				"ui_auto_weather_thunder" : "Авто диапазон - Гром",
+				"ui_auto_weather_thunderstorm" : "Авто диапазон - Гроза",
+				"ui_auto_weather_wind" : "Авто диапазон - Ветер",
+				"ui_cloud_drift" : "Движение облаков (по погоде)",
+				"ui_cloud_drift_direction" : "Направление движения облаков",
+				"ui_cloud_drift_speed" : "Скорость движения облаков",
+				"ui_dpr_level" : "Уровень DPR (качество)",
+				"ui_flash" : "Вспышка грома",
+				"ui_fps_limit" : "Лимит FPS (авто следует Wallpaper Engine)",
+				"ui_mode" : "Погода",
+				"ui_particle_density" : "Плотность частиц (по погоде)",
+				"ui_random_time" : "Случайный день/ночь при авто погоде",
+				"ui_reset_storage" : "Очистить локальное хранилище",
+				"ui_show_fps" : "Показывать FPS",
+				"ui_speed" : "Масштаб скорости (по погоде)",
+				"ui_sun_pos" : "Позиция солнца (ясно)",
+				"ui_sunrise_time" : "Время восхода",
+				"ui_sunset_time" : "Время заката",
+				"ui_tilt" : "Наклон мыши",
+				"ui_tilt_x" : "Горизонтальная сила",
+				"ui_tilt_y" : "Вертикальная сила",
+				"ui_time_of_day" : "День/Ночь",
+				"ui_transition_ms" : "Длительность перехода",
+				"ui_interval_30s" : "30 секунд",
+				"ui_interval_1m" : "1 минута",
+				"ui_interval_5m" : "5 минут",
+				"ui_interval_10m" : "10 минут",
+				"ui_interval_15m" : "15 минут",
+				"ui_interval_30m" : "30 минут",
+				"ui_interval_60m" : "60 минут",
+				"ui_direction_left" : "Влево",
+				"ui_direction_right" : "Вправо",
+				"ui_direction_random" : "Случайно",
+				"ui_auto" : "Авто",
+				"ui_fps_30" : "30 FPS",
+				"ui_fps_45" : "45 FPS",
+				"ui_fps_60" : "60 FPS",
+				"ui_fps_90" : "90 FPS",
+				"ui_fps_120" : "120 FPS",
+				"ui_fps_144" : "144 FPS",
+				"ui_weather_clear" : "Ясно",
+				"ui_weather_cloud" : "Переменная облачность",
+				"ui_weather_cloudy" : "Облачно",
+				"ui_weather_fog" : "Туман",
+				"ui_weather_haze" : "Дымка",
+				"ui_weather_rain" : "Дождь",
+				"ui_weather_sleet" : "Мокрый снег",
+				"ui_weather_snow" : "Снег",
+				"ui_weather_hail" : "Град",
+				"ui_weather_thunder" : "Гром",
+				"ui_weather_thunderstorm" : "Гроза",
+				"ui_weather_wind" : "Ветер",
+				"ui_sun_left" : "Сверху слева",
+				"ui_sun_center" : "Сверху по центру",
+				"ui_sun_right" : "Сверху справа",
+				"ui_time_day" : "День",
+				"ui_time_night" : "Ночь",
+				"ui_dpr_auto" : "Авто",
+				"ui_dpr_2" : "2",
+				"ui_dpr_1_5" : "1.5",
+				"ui_dpr_1_25" : "1.25",
+				"ui_dpr_1" : "1",
+				"ui_dpr_0_75" : "0.75",
+				"ui_dpr_0_5" : "0.5",
+				"ui_fps_auto" : "Авто"
 			}
 		}
 	},
-	"title" : "天气动态壁纸",
+	"preview" : "preview.gif",
+	"ratingsex" : "none",
+	"ratingviolence" : "none",
+	"tags" : [ "Abstract" ],
+	"title" : "几何风格动态天气效果壁纸",
 	"type" : "web",
 	"version" : 0
 }
