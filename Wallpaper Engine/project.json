@@ -1,0 +1,535 @@
+{
+	"file" : "index.html",
+	"general" : 
+	{
+		"properties" : 
+		{
+			"mode" : 
+			{
+				"index" : 0,
+				"options" : 
+				[
+					{
+						"label" : "晴",
+						"value" : "clear"
+					},
+					{
+						"label" : "多云",
+						"value" : "cloud"
+					},
+					{
+						"label" : "阴",
+						"value" : "cloudy"
+					},
+					{
+						"label" : "雾",
+						"value" : "fog"
+					},
+					{
+						"label" : "霾",
+						"value" : "haze"
+					},
+					{
+						"label" : "雨",
+						"value" : "rain"
+					},
+					{
+						"label" : "雨夹雪",
+						"value" : "sleet"
+					},
+					{
+						"label" : "雪",
+						"value" : "snow"
+					},
+					{
+						"label" : "冰雹",
+						"value" : "hail"
+					},
+					{
+						"label" : "雷",
+						"value" : "thunder"
+					},
+					{
+						"label" : "雷暴",
+						"value" : "thunderstorm"
+					},
+					{
+						"label" : "风",
+						"value" : "wind"
+					}
+				],
+				"order" : 100,
+				"text" : "天气",
+				"type" : "combo",
+				"value" : "clear"
+			},
+			"timeofday" : 
+			{
+				"index" : 1,
+				"options" : 
+				[
+					{
+						"label" : "白天",
+						"value" : "day"
+					},
+					{
+						"label" : "夜晚",
+						"value" : "night"
+					}
+				],
+				"order" : 101,
+				"condition" : "autotime.value == false",
+				"text" : "昼夜模式",
+				"type" : "combo",
+				"value" : "day"
+			},
+			"autotime" : 
+			{
+				"index" : 2,
+				"order" : 102,
+				"text" : "自动切换昼夜（按照日出日落时间，自动显示昼夜的壁纸）",
+				"type" : "bool",
+				"value" : false
+			},
+			
+			"sunrisetime" : 
+			{
+				"index" : 4,
+				"order" : 104,
+				"condition" : "autotime.value == true",
+				"text" : "日出时间",
+				"type" : "textinput",
+				"value" : "06:00"
+			},
+			"sunsettime" : 
+			{
+				"index" : 5,
+				"order" : 105,
+				"condition" : "autotime.value == true",
+				"text" : "日落时间",
+				"type" : "textinput",
+				"value" : "18:00"
+			},
+			"autoweather" : 
+			{
+				"index" : 6,
+				"order" : 106,
+				"text" : "自动切换天气",
+				"type" : "bool",
+				"value" : false
+			},
+			"randomtime" : 
+			{
+				"index" : 3,
+				"order" : 103,
+				"condition" : "autoweather.value == true",
+				"text" : "随机切换昼夜（当自动切换天气打开时，随机选择昼夜中的天气）",
+				"type" : "bool",
+				"value" : false
+			},
+			"autoweatherinterval" : 
+			{
+				"index" : 7,
+				"options" : 
+				[
+					{
+						"label" : "30 秒",
+						"value" : 0.5
+					},
+					{
+						"label" : "1 分钟",
+						"value" : 1
+					},
+					{
+						"label" : "5 分钟",
+						"value" : 5
+					},
+					{
+						"label" : "10 分钟",
+						"value" : 10
+					},
+					{
+						"label" : "15 分钟",
+						"value" : 15
+					},
+					{
+						"label" : "30 分钟",
+						"value" : 30
+					},
+					{
+						"label" : "60 分钟",
+						"value" : 60
+					}
+				],
+				"order" : 107,
+				"condition" : "autoweather.value == true",
+				"text" : "切换间隔",
+				"type" : "combo",
+				"value" : 5
+			},
+			"autoweatherclear" : 
+			{
+				"index" : 8,
+				"order" : 108,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-晴",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathercloud" : 
+			{
+				"index" : 9,
+				"order" : 109,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-多云",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathercloudy" : 
+			{
+				"index" : 10,
+				"order" : 110,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-阴",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherfog" : 
+			{
+				"index" : 11,
+				"order" : 111,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雾",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherhaze" : 
+			{
+				"index" : 12,
+				"order" : 112,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-霾",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherrain" : 
+			{
+				"index" : 13,
+				"order" : 113,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雨",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathersleet" : 
+			{
+				"index" : 14,
+				"order" : 114,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雨夹雪",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweathersnow" : 
+			{
+				"index" : 15,
+				"order" : 115,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雪",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherhail" : 
+			{
+				"index" : 16,
+				"order" : 116,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-冰雹",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherthunder" : 
+			{
+				"index" : 17,
+				"order" : 117,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雷",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherthunderstorm" : 
+			{
+				"index" : 18,
+				"order" : 118,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-雷暴",
+				"type" : "bool",
+				"value" : true
+			},
+			"autoweatherwind" : 
+			{
+				"index" : 19,
+				"order" : 119,
+				"condition" : "autoweather.value == true",
+				"text" : "自动范围-风",
+				"type" : "bool",
+				"value" : true
+			},
+			"animate" : 
+			{
+				"index" : 20,
+				"order" : 120,
+				"text" : "动画",
+				"type" : "bool",
+				"value" : true
+			},
+			"particledensity" : 
+			{
+				"index" : 21,
+				"max" : 2,
+				"min" : 0,
+				"order" : 121,
+				"step" : 0.1,
+				"text" : "粒子密度",
+				"type" : "slider",
+				"value" : 1
+			},
+			"speed" : 
+			{
+				"index" : 22,
+				"max" : 5,
+				"min" : 0.25,
+				"order" : 122,
+				"step" : 0.05,
+				"text" : "速度缩放",
+				"type" : "slider",
+				"value" : 1
+			},
+			"clouddrift" : 
+			{
+				"index" : 23,
+				"order" : 123,
+				"condition" : "mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\"",
+				"text" : "云层移动",
+				"type" : "bool",
+				"value" : true
+			},
+			"clouddriftdirection" : 
+			{
+				"index" : 24,
+				"options" : 
+				[
+					{
+						"label" : "向左",
+						"value" : "left"
+					},
+					{
+						"label" : "向右",
+						"value" : "right"
+					},
+					{
+						"label" : "随机",
+						"value" : "random"
+					}
+				],
+				"order" : 124,
+				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
+				"text" : "云层移动方向",
+				"type" : "combo",
+				"value" : "random"
+			},
+			"clouddriftspeed" : 
+			{
+				"index" : 25,
+				"max" : 10,
+				"min" : 0,
+				"order" : 125,
+				"condition" : "clouddrift.value == true && (mode.value == \"cloud\" || mode.value == \"cloudy\" || mode.value == \"fog\" || mode.value == \"haze\" || mode.value == \"thunder\")",
+				"step" : 0.1,
+				"text" : "云层移动速度",
+				"type" : "slider",
+				"value" : 1
+			},
+			"flash" : 
+			{
+				"index" : 26,
+				"order" : 126,
+				"condition" : "mode.value == \"thunder\" || mode.value == \"thunderstorm\"",
+				"text" : "雷暴天气闪屏效果",
+				"type" : "bool",
+				"value" : true
+			},
+			"sunpos" : 
+			{
+				"index" : 27,
+				"options" : 
+				[
+					{
+						"label" : "左上角",
+						"value" : "left"
+					},
+					{
+						"label" : "上方中间",
+						"value" : "center"
+					},
+					{
+						"label" : "右上角",
+						"value" : "right"
+					}
+				],
+				"order" : 127,
+				"condition" : "mode.value == \"clear\"",
+				"text" : "太阳位置（晴）",
+				"type" : "combo",
+				"value" : "right"
+			},
+			"tilt" : 
+			{
+				"index" : 28,
+				"order" : 128,
+				"text" : "鼠标倾斜效果",
+				"type" : "bool",
+				"value" : false
+			},
+			"tiltx" : 
+			{
+				"index" : 29,
+				"max" : 2,
+				"min" : 0,
+				"order" : 129,
+				"condition" : "tilt.value == true",
+				"step" : 0.05,
+				"text" : "鼠标左右倾斜强度",
+				"type" : "slider",
+				"value" : 1
+			},
+			"tilty" : 
+			{
+				"index" : 30,
+				"max" : 2,
+				"min" : 0,
+				"order" : 130,
+				"condition" : "tilt.value == true",
+				"step" : 0.05,
+				"text" : "鼠标上下倾斜强度",
+				"type" : "slider",
+				"value" : 1
+			},
+			"fpslimit" : 
+			{
+				"index" : 31,
+				"options" : 
+				[
+					{
+						"label" : "自动",
+						"value" : 0
+					},
+					{
+						"label" : "30 FPS",
+						"value" : 30
+					},
+					{
+						"label" : "45 FPS",
+						"value" : 45
+					},
+					{
+						"label" : "60 FPS",
+						"value" : 60
+					},
+					{
+						"label" : "90 FPS",
+						"value" : 90
+					},
+					{
+						"label" : "120 FPS",
+						"value" : 120
+					},
+					{
+						"label" : "144 FPS",
+						"value" : 144
+					}
+				],
+				"order" : 131,
+				"text" : "帧率上限（自动模式跟随Wallpaper Engine的上限，固定值忽略Wallpaper Engine的上限设置）",
+				"type" : "combo",
+				"value" : 0
+			},
+			"dprlevel" : 
+			{
+				"index" : 32,
+				"options" : 
+				[
+					{
+						"label" : "自动",
+						"value" : "auto"
+					},
+					{
+						"label" : "2",
+						"value" : "2"
+					},
+					{
+						"label" : "1.5",
+						"value" : "1.5"
+					},
+					{
+						"label" : "1.25",
+						"value" : "1.25"
+					},
+					{
+						"label" : "1",
+						"value" : "1"
+					},
+					{
+						"label" : "0.75",
+						"value" : "0.75"
+					},
+					{
+						"label" : "0.5",
+						"value" : "0.5"
+					}
+				],
+				"order" : 132,
+				"text" : "DPR 档位（质量相关，自动模式清晰度最高，和分辨率和windows缩放系数有关。）",
+				"type" : "combo",
+				"value" : "auto"
+			},
+			"transitionms" : 
+			{
+				"index" : 33,
+				"max" : 4000,
+				"min" : 0,
+				"order" : 133,
+				"step" : 50,
+				"text" : "切换过渡时间",
+				"type" : "slider",
+				"value" : 800
+			},
+			"showfps" : 
+			{
+				"index" : 34,
+				"order" : 134,
+				"text" : "显示 FPS（在右上角显示动画的刷新频率）",
+				"type" : "bool",
+				"value" : false
+			},
+			"resetstorage" : 
+			{
+				"index" : 35,
+				"order" : 135,
+				"text" : "清除本地存储（每点击一次就会清除网页的localStorage缓存）",
+				"type" : "bool",
+				"value" : false
+			},
+			"schemecolor" : 
+			{
+				"order" : 0,
+				"text" : "ui_browse_properties_scheme_color",
+				"type" : "color",
+				"value" : "0 0 0"
+			}
+		}
+	},
+	"title" : "天气动态壁纸",
+	"type" : "web",
+	"version" : 0
+}

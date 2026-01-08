@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>动态壁纸</title>
+  <link rel="stylesheet" href="./src/common.css" />
+</head>
+<body>
+  <canvas id="stage"></canvas>
+
+  <button id="uiToggle" class="ui-toggle" type="button" aria-expanded="false">控制面板</button>
+
+  <div id="ui">
+    <div class="dot" aria-hidden="true"></div>
+    <label>
+      天气
+      <select id="weather">
+        <option value="clear">晴</option>
+        <option value="cloud">多云</option>
+        <option value="cloudy">阴</option>
+        <option value="fog">雾</option>
+        <option value="haze">霾</option>
+        <option value="rain">雨</option>
+        <option value="sleet">雨夹雪</option>
+        <option value="snow">雪</option>
+        <option value="hail">冰雹</option>
+        <option value="thunder">雷</option>
+        <option value="thunderstorm">雷暴</option>
+        <option value="wind">风</option>
+      </select>
+    </label>
+    <label>
+      时间
+      <select id="time">
+        <option value="day">白天</option>
+        <option value="night">夜晚</option>
+      </select>
+    </label>
+    <label>
+      自动切换昼夜
+      <div class="row">
+        <input id="autoTime" type="checkbox" />
+        <span class="hint">关闭</span>
+      </div>
+    </label>
+    <label>
+      随机切换昼夜
+      <div class="row">
+        <input id="randomTime" type="checkbox" />
+        <span class="hint">关闭</span>
+      </div>
+    </label>
+    <label>
+      日出时间
+      <div class="row">
+        <input id="sunriseTime" type="time" step="60" />
+      </div>
+    </label>
+    <label>
+      日落时间
+      <div class="row">
+        <input id="sunsetTime" type="time" step="60" />
+      </div>
+    </label>
+    <label>
+      自动切换天气
+      <div class="row">
+        <input id="autoWeather" type="checkbox" />
+        <span class="hint">关闭</span>
+      </div>
+    </label>
+    <label>
+      切换间隔
+      <select id="autoWeatherInterval">
+        <option value="0.5">30 秒</option>
+        <option value="1">1 分钟</option>
+        <option value="5">5 分钟</option>
+        <option value="10">10 分钟</option>
+        <option value="15">15 分钟</option>
+        <option value="30">30 分钟</option>
+        <option value="60">1 小时</option>
+      </select>
+    </label>
+    <label>
+      自动范围
+      <div id="autoWeatherRange" class="range-grid">
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="clear" checked />
+          <span>晴</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="cloud" checked />
+          <span>多云</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="cloudy" checked />
+          <span>阴</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="fog" checked />
+          <span>雾</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="haze" checked />
+          <span>霾</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="rain" checked />
+          <span>雨</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="sleet" checked />
+          <span>雨夹雪</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="snow" checked />
+          <span>雪</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="hail" checked />
+          <span>冰雹</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="thunder" checked />
+          <span>雷</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="thunderstorm" checked />
+          <span>雷暴</span>
+        </label>
+        <label class="range-item">
+          <input type="checkbox" data-auto-weather-range value="wind" checked />
+          <span>风</span>
+        </label>
+      </div>
+    </label>
+    <label>
+      动画
+      <div class="row">
+        <input id="animate" type="checkbox" checked />
+        <span class="hint">开启</span>
+      </div>
+    </label>
+    <label>
+      粒子密度
+      <div class="row">
+        <input id="particleDensity" type="range" min="0" max="2" step="0.1" value="1" />
+        <span id="particleDensityValue" class="hint">1.0x</span>
+      </div>
+    </label>
+    <label>
+      帧率
+      <select id="fpsLimit">
+        <option value="0">自动</option>
+        <option value="30">30 FPS</option>
+        <option value="45">45 FPS</option>
+        <option value="60">60 FPS</option>
+        <option value="90">90 FPS</option>
+        <option value="120">120 FPS</option>
+        <option value="144">144 FPS</option>
+      </select>
+    </label>
+    <label>
+      帧率显示
+      <div class="row">
+        <input id="showFps" type="checkbox" />
+        <span class="hint">关闭</span>
+      </div>
+    </label>
+    <label>
+      DPR 档位
+      <select id="dprLevel">
+        <option value="auto">自动</option>
+        <option value="2">2</option>
+        <option value="1.5">1.5</option>
+        <option value="1.25">1.25</option>
+        <option value="1">1</option>
+        <option value="0.75">0.75</option>
+        <option value="0.5">0.5</option>
+      </select>
+    </label>
+    <label>
+      速度
+      <div class="row">
+        <input id="speed" type="range" min="0.25" max="5" step="0.05" value="1" />
+        <span id="speedValue" class="hint">1.00x</span>
+      </div>
+    </label>
+    <label>
+      倾斜
+      <div class="row">
+        <input id="tilt" type="checkbox" />
+        <span class="hint">开启</span>
+      </div>
+    </label>
+    <label>
+      云层移动
+      <div class="row">
+        <input id="cloudDrift" type="checkbox" checked />
+        <span class="hint">开启</span>
+      </div>
+    </label>
+    <label>
+      移动方向
+      <select id="cloudDriftDirection">
+        <option value="left">向左</option>
+        <option value="right">向右</option>
+        <option value="random">随机</option>
+      </select>
+    </label>
+    <label>
+      移动速度
+      <div class="row">
+        <input id="cloudDriftSpeed" type="range" min="0" max="10" step="0.1" value="1" />
+        <span id="cloudDriftSpeedValue" class="hint">1.00x</span>
+      </div>
+    </label>
+    <label>
+      闪屏
+      <div class="row">
+        <input id="flash" type="checkbox" checked />
+        <span class="hint">开启</span>
+      </div>
+    </label>
+    <label>
+      太阳位置
+      <select id="sunPos">
+        <option value="left">左上角</option>
+        <option value="center">上方中间</option>
+        <option value="right">右上角</option>
+      </select>
+    </label>
+    <label>
+      左右倾斜
+      <div class="row">
+        <input id="tiltX" type="range" min="0" max="2" step="0.05" value="1" />
+        <span id="tiltXValue" class="hint">1.00x</span>
+      </div>
+    </label>
+    <label>
+      上下倾斜
+      <div class="row">
+        <input id="tiltY" type="range" min="0" max="2" step="0.05" value="1" />
+        <span id="tiltYValue" class="hint">1.00x</span>
+      </div>
+    </label>
+    <div class="hint">移动鼠标模拟倾斜</div>
+  </div>
+  <div id="fpsOverlay" class="fps-overlay">
+    FPS <span id="fpsValue">--</span>
+    DT <span id="dtValue">--</span>ms
+  </div>
+
+  <script src="./src/config.js"></script>
+  <script src="./src/we-adapter.js"></script>
+  <script src="./src/ui.js"></script>
+  <script src="./src/engine.js"></script>
+  <script src="./src/weather-clear.js"></script>
+  <script src="./src/weather-cloud.js"></script>
+  <script src="./src/weather-rain.js"></script>
+  <script src="./src/weather-snow.js"></script>
+  <script src="./src/weather-hail.js"></script>
+  <script src="./src/weather-wind.js"></script>
+</body>
+</html>
