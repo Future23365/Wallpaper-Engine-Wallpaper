@@ -69,6 +69,10 @@
   let fpsThreshold = 0;
   let dtSampleSum = 0;
   let dtSampleCount = 0;
+  let lastMouseUpdate = 0;
+  let pendingMouse = false;
+  let pendingMouseX = 0;
+  let pendingMouseY = 0;
 
   let current = null;
   let previous = null;
@@ -89,11 +93,14 @@
       ? dom.tiltToggle.checked
       : cfg.config.global.tilt === true;
     if (!tiltEnabled) return;
-    updateRotationTargets(event.clientX, event.clientY);
+    pendingMouseX = event.clientX;
+    pendingMouseY = event.clientY;
+    pendingMouse = true;
   };
   const onMouseLeave = () => {
     targetRotation2D = 0;
     targetRotation3D = 0;
+    pendingMouse = false;
   };
 
   function getActiveWeather() {
@@ -262,6 +269,16 @@
     targetRotation3D = clamp(ny * 10 * tiltYScale, -12 * tiltYScale, 12 * tiltYScale);
   }
 
+  function applyMouseTilt(timestamp) {
+    if (!pendingMouse) return;
+    const global = cfg.getGlobalConfig();
+    const fpsLimit = global?.fpsLimit ?? 0;
+    const minInterval = fpsLimit > 0 ? (1000 / fpsLimit) : 16;
+    if (timestamp - lastMouseUpdate < minInterval) return;
+    lastMouseUpdate = timestamp;
+    updateRotationTargets(pendingMouseX, pendingMouseY);
+  }
+
   function loop(timestamp) {
     if (!running) return;
     const global = cfg.getGlobalConfig();
@@ -291,6 +308,7 @@
     const interval = dt * 1000;
     updateFpsMeter(timestamp, interval);
 
+    applyMouseTilt(timestamp);
     // 低通滤波按时间步长缩放，避免帧率变化导致倾斜响应差异。
     const baseSmoothing = 0.08;
     const frameBase = 1 / 60;
