@@ -1,9 +1,9 @@
-# 材质风格天气动态壁纸（Wallpaper Engine 适配版）
+# 几何风格动态天气效果壁纸
 
 几年前使用过一款天气app：[几何天气](https://github.com/WangDaYeeeeee/GeometricWeather)，很喜欢这款天气app的动态天气效果，一直把它的动态天气当做我的手机动态壁纸使用。后面换了iPhone，就没关注过这个app了，再后来又换回了Android，发现这个app的作者很少维护了，有些惋惜，不过发现有了新的开发者Fork并一直再持续维护：[微风天气](https://github.com/breezy-weather/breezy-weather)，不过之前有一段时间动态壁纸有些问题，好像把这个功能删掉了，后面也没咋关注过该项目，只是在手机里下载了当作精致app留念。
 看到最近的vibe coding比较流行，于是就用AI辅助，把[微风天气](https://github.com/breezy-weather/breezy-weather)这个项目的动态壁纸效果放到了web上，正好Wallpaper Engine也支持web壁纸，索性就做了起来，于是就有了这个项目。
 
-**创意工坊地址** https://steamcommunity.com/sharedfiles/filedetails/?id=3642026954
+**Steam创意工坊地址：** https://steamcommunity.com/sharedfiles/filedetails/?id=3642026954
 ## 运行方式
 - 直接打开 `Wallpaper Engine/index.html`（纯静态，无需构建）
 - 或在项目根目录启动本地静态服务器：
