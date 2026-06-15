@@ -110,12 +110,14 @@
       this.viewHeight = sizes[1];
       this.color = colors[Math.floor(Math.random() * colors.length)];
       this.scale = Math.random();
+      this.fallScale = Math.sqrt(this.scale);
       this.width = this.viewWidth * 0.0088 * this.scale;
       this.speed = this.viewWidth / 200;
       this.maxHeight = 1.1 * this.viewWidth / Math.cos(degToRad(60));
       this.minHeight = this.maxHeight * 0.7;
       this.progress = 0;
       this.delay = 0;
+      this.rect = { x: 0, y: 0, w: 0, h: 0 };
       this.init(true);
     }
 
@@ -135,7 +137,10 @@
     buildRect() {
       const x = this.x - (this.canvasSize - this.viewWidth) * 0.5;
       const y = this.y - (this.canvasSize - this.viewHeight) * 0.5;
-      this.rect = { x, y, w: this.width, h: this.height };
+      this.rect.x = x;
+      this.rect.y = y;
+      this.rect.w = this.width;
+      this.rect.h = this.height;
     }
 
     update(interval, deltaRotation3D) {
@@ -145,7 +150,7 @@
         return;
       }
       this.x -= this.speed * interval * 5 * Math.sin(degToRad(deltaRotation3D)) * Math.cos(degToRad(60));
-      this.y += this.speed * interval * (Math.sqrt(this.scale) - 5 * Math.sin(degToRad(deltaRotation3D)) * Math.sin(degToRad(60)));
+      this.y += this.speed * interval * (this.fallScale - 5 * Math.sin(degToRad(deltaRotation3D)) * Math.sin(degToRad(60)));
       this.buildRect();
     }
 

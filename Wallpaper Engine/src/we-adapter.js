@@ -30,6 +30,12 @@
     return parsed;
   }
 
+  function normalizeWeatherKind(value, fallback = "clear") {
+    return cfg.normalizeWeatherKind
+      ? cfg.normalizeWeatherKind(value, fallback)
+      : fallback;
+  }
+
   function enqueue(action) {
     if (window.WeatherCommon) {
       action();
@@ -55,10 +61,26 @@
     return value === true || value === "true" || value === 1 || value === "1";
   }
 
+  function getFirstDefinedProperty(properties, keys) {
+    for (let i = 0; i < keys.length; i += 1) {
+      const property = properties[keys[i]];
+      if (property?.value !== undefined) return property;
+    }
+    return null;
+  }
+
   function parseWeatherRange(value) {
-    if (Array.isArray(value)) return value;
+    const allowed = cfg.constants?.WEATHER_KINDS || [];
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => normalizeWeatherKind(String(item).trim(), ""))
+        .filter((item) => item && allowed.includes(item));
+    }
     if (typeof value === "string") {
-      return value.split(/[\s,|]+/).map((item) => item.trim()).filter(Boolean);
+      return value
+        .split(/[\s,|]+/)
+        .map((item) => normalizeWeatherKind(item.trim(), ""))
+        .filter((item) => item && allowed.includes(item));
     }
     return [];
   }
@@ -140,6 +162,18 @@
     }
   }
 
+  function applyWeatherPatch(targetWeather, weatherPatch, refresh, transitionMs = 0) {
+    const kind = normalizeWeatherKind(targetWeather, cfg.config.global.weather || "clear");
+    const weatherCfg = cfg.getWeatherConfig(kind);
+    Object.assign(weatherCfg, weatherPatch);
+    cfg.saveConfig();
+    window.WeatherUI?.syncWeatherControls?.();
+    if (refresh) {
+      enqueue(() => window.WeatherCommon?.refresh(transitionMs));
+    }
+    return weatherCfg;
+  }
+
   function setMode(mode, transitionMs = 800) {
     applyPatch({ weather: mode }, true, false, transitionMs);
   }
@@ -154,6 +188,24 @@
 
   function setDprLevel(level) {
     applyPatch({ dprLevel: level }, false, true);
+  }
+
+  function setIntensity(value) {
+    const kind = cfg.config.global.weather || "clear";
+    const weatherCfg = cfg.getWeatherConfig(kind);
+    const density = normalizeNumber(value, weatherCfg.density ?? 1, 0, 2);
+    applyWeatherPatch(kind, { density }, true, 0);
+  }
+
+  function setWind(value) {
+    const windCfg = cfg.getWeatherConfig("wind");
+    const displaySpeed = normalizeNumber(value, (windCfg.speed ?? 0.5) * 2, 0.25, 5);
+    const isWindActive = normalizeWeatherKind(cfg.config.global.weather || "clear", "clear") === "wind";
+    applyWeatherPatch("wind", { speed: displaySpeed / 2 }, isWindActive, 0);
+  }
+
+  function setQuality(level) {
+    setDprLevel(level);
   }
 
   function getState() {
@@ -211,6 +263,9 @@
     setTimeOfDay,
     setAutoTime,
     setDprLevel,
+    setIntensity,
+    setWind,
+    setQuality,
     getState,
     destroy,
   };
@@ -228,7 +283,7 @@
       let weatherDirty = false;
 
       if (properties.mode?.value !== undefined) {
-        userPatch.weather = properties.mode.value;
+        userPatch.weather = normalizeWeatherKind(properties.mode.value, cfg.config.global.weather || "clear");
         refresh = true;
       }
       if (properties.autotime?.value !== undefined) {
@@ -236,8 +291,9 @@
         refresh = true;
         autoTimeChanged = true;
       }
-      if (properties.timeofday?.value !== undefined) {
-        userPatch.time = properties.timeofday.value;
+      const timeOfDayProperty = getFirstDefinedProperty(properties, ["timeofday", "timeOfDay"]);
+      if (timeOfDayProperty?.value !== undefined) {
+        userPatch.time = timeOfDayProperty.value;
         if (!autoTimeChanged) {
           userPatch.autoTime = false;
         }
@@ -265,19 +321,21 @@
         userPatch.autoWeatherInterval = normalizeNumber(
           properties.autoweatherinterval.value,
           cfg.config.global.autoWeatherInterval ?? 5,
-          1,
+          0.5,
           60
         );
       }
       if (properties.autoweatherrange?.value !== undefined) {
-        userPatch.autoWeatherRange = parseWeatherRange(properties.autoweatherrange.value);
+        const range = parseWeatherRange(properties.autoweatherrange.value);
+        userPatch.autoWeatherRange = range.length ? range : normalizeAutoWeatherRange();
       }
-      const targetWeather = userPatch.weather || cfg.config.global.weather || "clear";
+      const targetWeather = normalizeWeatherKind(userPatch.weather || cfg.config.global.weather || "clear", "clear");
       const weatherCfg = cfg.getWeatherConfig(targetWeather);
 
-      if (properties.particledensity?.value !== undefined) {
+      const densityProperty = getFirstDefinedProperty(properties, ["particledensity", "intensity"]);
+      if (densityProperty?.value !== undefined) {
         weatherPatch.density = normalizeNumber(
-          properties.particledensity.value,
+          densityProperty.value,
           weatherCfg.density ?? 1,
           0,
           2
@@ -334,8 +392,9 @@
         }
         lastResetStorage = shouldReset;
       }
-      if (properties.dprlevel?.value !== undefined) {
-        userPatch.dprLevel = String(properties.dprlevel.value);
+      const dprProperty = getFirstDefinedProperty(properties, ["dprlevel", "quality"]);
+      if (dprProperty?.value !== undefined) {
+        userPatch.dprLevel = String(dprProperty.value);
         resize = true;
       }
       if (properties.fpslimit?.value !== undefined) {
@@ -387,6 +446,16 @@
         weatherPatch.speed = isWind ? displaySpeed / 2 : displaySpeed;
         weatherDirty = true;
         refresh = true;
+      }
+      if (properties.wind?.value !== undefined) {
+        const windCfg = cfg.getWeatherConfig("wind");
+        const displaySpeed = normalizeNumber(properties.wind.value, (windCfg.speed ?? 0.5) * 2, 0.25, 5);
+        windCfg.speed = displaySpeed / 2;
+        cfg.saveConfig();
+        window.WeatherUI?.syncWeatherControls?.();
+        if (targetWeather === "wind") {
+          refresh = true;
+        }
       }
       if (properties.flash?.value !== undefined) {
         weatherPatch.flash = parseBool(properties.flash.value);

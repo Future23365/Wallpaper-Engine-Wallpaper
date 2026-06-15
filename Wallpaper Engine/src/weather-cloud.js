@@ -191,8 +191,7 @@
     }
 
     move(interval, driftOffset) {
-      const { rotation2D, rotation3D } = getState();
-      const width = getState().width;
+      const { width, rotation2D, rotation3D } = getState();
       const x = this.initCX + driftOffset + Math.sin(degToRad(rotation2D)) * 0.4 * this.radius * this.moveFactor;
       this.baseX = x;
       this.centerX = ((x % width) + width) % width;
@@ -214,13 +213,13 @@
       ctx.globalAlpha = this.alpha * fade;
       const baseX = Number.isFinite(this.baseX) ? this.baseX : this.centerX;
       const x = ((baseX % width) + width) % width;
-      const positions = [x, x - width, x + width];
-      positions.forEach((px) => {
-        if (px + this.radius < 0 || px - this.radius > width) return;
+      for (let i = -1; i <= 1; i += 1) {
+        const px = x + width * i;
+        if (px + this.radius < 0 || px - this.radius > width) continue;
         ctx.beginPath();
         ctx.arc(px, this.centerY, this.radius, 0, TWO_PI);
         ctx.fill();
-      });
+      }
       ctx.restore();
     }
   }

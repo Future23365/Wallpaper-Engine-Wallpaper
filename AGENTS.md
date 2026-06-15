@@ -17,8 +17,8 @@
 ### 2.1 多天气场景（白天/夜晚）
 场景 mode 枚举：
 - clear：晴
-- partly_cloudy：多云
-- overcast：阴
+- partly_cloudy：多云（外部推荐名；当前 WE 发布配置兼容 cloud）
+- overcast：阴（外部推荐名；当前 WE 发布配置兼容 cloudy）
 - fog：雾
 - haze：霾
 - rain：雨
@@ -85,7 +85,7 @@
 ### 基础要求
 - 尽量复用对象：对象池 / TypedArray（避免 GC 抖动）
 - 渐变/路径创建尽量缓存或降频（避免每帧创建大量昂贵对象）
-- DPR 必须受控（dprCap），不要无上限跟随 devicePixelRatio
+- DPR 必须可配置；auto 档允许无上限跟随 devicePixelRatio 以获得最高质量，固定档位用于降档/封顶
 
 ### Wallpaper Engine 特别注意
 - 避免高频 DOM 更新（UI 只在 debug 模式）
@@ -125,6 +125,7 @@
 - applyGeneralProperties 也可能是部分更新：对 properties.fps 等字段必须判空再使用
 - wallpaperPropertyListener 必须挂在全局作用域，避免错过首次加载事件
 - 首次加载后通常会调用一次 applyUserProperties 来应用初始值，逻辑必须幂等
+- 外部 mode 需兼容 partly_cloudy/overcast，并在 Config 内规范化到当前实现使用的 cloud/cloudy，避免破坏已发布的 Wallpaper Engine 配置
 
 ---
 

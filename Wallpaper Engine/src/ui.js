@@ -53,11 +53,19 @@
     dom.uiToggle.textContent = "控制面板";
   }
 
+  function normalizeWeatherKind(value, fallback = "clear") {
+    return cfg.normalizeWeatherKind
+      ? cfg.normalizeWeatherKind(value, fallback)
+      : fallback;
+  }
+
   function getActiveWeather() {
     if (document.body.classList.contains("no-ui")) {
-      return document.body.dataset.weather || cfg.config.global.weather || "clear";
+      const raw = document.body.dataset.weather || cfg.config.global.weather || "clear";
+      return normalizeWeatherKind(raw, "clear");
     }
-    return dom.weatherSelect?.value || document.body.dataset.weather || cfg.config.global.weather || "clear";
+    const raw = dom.weatherSelect?.value || document.body.dataset.weather || cfg.config.global.weather || "clear";
+    return normalizeWeatherKind(raw, "clear");
   }
 
   function getAutoWeatherIntervalMs() {
@@ -325,7 +333,7 @@
       }
       return;
     }
-    const fixedWeather = document.body.dataset.weather;
+    const fixedWeather = normalizeWeatherKind(document.body.dataset.weather, "");
     const fixedTime = document.body.dataset.time;
     if (fixedWeather && dom.weatherSelect) {
       dom.weatherSelect.value = fixedWeather;

@@ -52,6 +52,7 @@
       this.viewHeight = sizes[1];
       this.color = color;
       this.scale = scale;
+      this.scalePower = Math.pow(scale, 1.5);
       this.radius = this.canvasSize * (0.005 + Math.random() * 0.007) * scale;
       this.speedY = this.canvasSize / (1000 * (2.5 + Math.random())) * 1.5;
       this.init(true);
@@ -70,8 +71,8 @@
     }
 
     move(interval, deltaRotation3D) {
-      this.cx += this.speedX * interval * Math.pow(this.scale, 1.5);
-      this.cy += this.speedY * interval * (Math.pow(this.scale, 1.5) - 5 * Math.sin(degToRad(deltaRotation3D)));
+      this.cx += this.speedX * interval * this.scalePower;
+      this.cy += this.speedY * interval * (this.scalePower - 5 * Math.sin(degToRad(deltaRotation3D)));
       if (this.centerY >= this.canvasSize) {
         this.init(false);
       } else {

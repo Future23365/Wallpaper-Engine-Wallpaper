@@ -50,6 +50,8 @@
     const base = 1000 / 60;
     return delta * (base / intervalMs);
   };
+  const SLOW_FADE_KINDS = new Set(["clear", "cloud", "cloudy", "fog", "haze", "thunder"]);
+  const backgroundGradientCache = new Map();
 
   let width = 0;
   let height = 0;
@@ -105,9 +107,12 @@
 
   function getActiveWeather() {
     const fixedWeather = document.body.dataset.weather;
-    if (fixedWeather) return fixedWeather;
+    if (fixedWeather) {
+      return cfg.normalizeWeatherKind ? cfg.normalizeWeatherKind(fixedWeather, "clear") : fixedWeather;
+    }
     const allowDom = !document.body.classList.contains("no-ui");
-    return (allowDom ? dom.weatherSelect?.value : null) || cfg.config.global.weather || "clear";
+    const raw = (allowDom ? dom.weatherSelect?.value : null) || cfg.config.global.weather || "clear";
+    return cfg.normalizeWeatherKind ? cfg.normalizeWeatherKind(raw, "clear") : raw;
   }
 
   function isDaytime() {
@@ -218,7 +223,7 @@
     const global = cfg.getGlobalConfig();
     const deviceDpr = window.devicePixelRatio || 1;
     const dprLevel = global?.dprLevel ?? "auto";
-    // DPR 档位仅作为上限或降档使用，不会超过设备 DPR。
+    // auto 追求最高质量；固定 DPR 档位作为降档或上限使用，不会超过设备 DPR。
     if (dprLevel === "auto") {
       deviceScale = deviceDpr;
     } else {
@@ -230,15 +235,21 @@
     canvas.style.width = `${width}px`;
     canvas.style.height = `${height}px`;
     ctx.setTransform(deviceScale, 0, 0, deviceScale, 0, 0);
+    backgroundGradientCache.clear();
   }
 
   function drawBackground(kind, isDay, alpha = 1) {
     const mode = isDay ? "day" : "night";
     const colors = BACKGROUNDS[mode][kind] || ["#0a0f18", "#0a0f18", "#0a0f18"];
-    const gradient = ctx.createLinearGradient(0, 0, 0, height);
-    gradient.addColorStop(0, colors[0]);
-    gradient.addColorStop(0.5, colors[1]);
-    gradient.addColorStop(1, colors[2]);
+    const cacheKey = `${mode}:${kind}:${height}`;
+    let gradient = backgroundGradientCache.get(cacheKey);
+    if (!gradient) {
+      gradient = ctx.createLinearGradient(0, 0, 0, height);
+      gradient.addColorStop(0, colors[0]);
+      gradient.addColorStop(0.5, colors[1]);
+      gradient.addColorStop(1, colors[2]);
+      backgroundGradientCache.set(cacheKey, gradient);
+    }
     ctx.save();
     ctx.globalAlpha = alpha;
     ctx.fillStyle = gradient;
@@ -330,8 +341,7 @@
     let fadeOutMs = transitionMs;
     if (hasTransition) {
       // 云雾类场景淡出更慢，避免硬切。
-      const slowFadeKinds = new Set(["clear", "cloud", "cloudy", "fog", "haze", "thunder"]);
-      const slowFade = previous && slowFadeKinds.has(previous.kind);
+      const slowFade = previous && SLOW_FADE_KINDS.has(previous.kind);
       const fadeInMs = Math.max(1, transitionMs * (slowFade ? 0.7 : 0.6));
       fadeOutMs = Math.max(1, transitionMs * (slowFade ? 1.6 : 1));
       currentAlpha = smoothStep(clamp((timestamp - transitionStart) / fadeInMs, 0, 1));

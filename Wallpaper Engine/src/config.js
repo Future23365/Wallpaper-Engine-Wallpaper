@@ -16,6 +16,11 @@
     "thunderstorm",
     "wind",
   ];
+  // 外部合同曾使用 partly_cloudy / overcast；内部继续保留已发布的 cloud / cloudy，避免破坏现有 WE 配置。
+  const WEATHER_KIND_ALIASES = {
+    partly_cloudy: "cloud",
+    overcast: "cloudy",
+  };
   const DPR_LEVELS = ["auto", "2", "1.5", "1.25", "1", "0.75", "0.5"];
   const DEFAULT_GLOBAL = {
     time: "day",
@@ -57,6 +62,14 @@
     return typeof value === "string" && value.length ? value : fallback;
   }
 
+  function normalizeWeatherKind(value, fallback) {
+    if (typeof value !== "string") return fallback;
+    const raw = value.trim();
+    if (!raw) return fallback;
+    const normalized = WEATHER_KIND_ALIASES[raw] || raw;
+    return WEATHER_KINDS.includes(normalized) ? normalized : fallback;
+  }
+
   function normalizeTimeString(value, fallback) {
     if (typeof value !== "string") return fallback;
     const trimmed = value.trim();
@@ -77,6 +90,7 @@
     }
     const filtered = list
       .map((item) => String(item).trim())
+      .map((item) => WEATHER_KIND_ALIASES[item] || item)
       .filter((item) => allowed.includes(item));
     const unique = Array.from(new Set(filtered));
     if (!unique.length) {
@@ -105,7 +119,7 @@
       return {
         global: {
           time: normalizeString(parsed.global?.time, DEFAULT_GLOBAL.time),
-          weather: normalizeString(parsed.global?.weather, DEFAULT_GLOBAL.weather),
+          weather: normalizeWeatherKind(parsed.global?.weather, DEFAULT_GLOBAL.weather),
           autoTime: normalizeBoolean(parsed.global?.autoTime, DEFAULT_GLOBAL.autoTime),
           tilt: normalizeBoolean(parsed.global?.tilt, DEFAULT_GLOBAL.tilt),
           tiltX: normalizeNumber(parsed.global?.tiltX, DEFAULT_GLOBAL.tiltX, 0, 2),
@@ -150,13 +164,14 @@
   }
 
   function getWeatherConfig(kind) {
+    const weatherKind = normalizeWeatherKind(kind, DEFAULT_GLOBAL.weather);
     // 懒初始化各天气默认配置，保持配置体积小。
-    if (!config.perWeather[kind]) {
-      const baseSpeed = (kind === "wind" || kind === "hail") ? 0.5 : 1;
-      const isThunder = kind === "thunder" || kind === "thunderstorm";
-      const isCloud = kind === "cloud" || kind === "cloudy" || kind === "fog" || kind === "haze" || kind === "thunder";
+    if (!config.perWeather[weatherKind]) {
+      const baseSpeed = (weatherKind === "wind" || weatherKind === "hail") ? 0.5 : 1;
+      const isThunder = weatherKind === "thunder" || weatherKind === "thunderstorm";
+      const isCloud = weatherKind === "cloud" || weatherKind === "cloudy" || weatherKind === "fog" || weatherKind === "haze" || weatherKind === "thunder";
       if (isThunder) {
-        config.perWeather[kind] = {
+        config.perWeather[weatherKind] = {
           speed: baseSpeed,
           animate: true,
           flash: true,
@@ -166,7 +181,7 @@
           cloudDriftDirection: "random",
         };
       } else if (isCloud) {
-        config.perWeather[kind] = {
+        config.perWeather[weatherKind] = {
           speed: baseSpeed,
           animate: true,
           density: 1,
@@ -175,36 +190,36 @@
           cloudDriftDirection: "random",
         };
       } else {
-        config.perWeather[kind] = { speed: baseSpeed, animate: true, density: 1 };
+        config.perWeather[weatherKind] = { speed: baseSpeed, animate: true, density: 1 };
       }
     }
-    if (typeof config.perWeather[kind].density !== "number") {
-      config.perWeather[kind].density = 1;
+    if (typeof config.perWeather[weatherKind].density !== "number") {
+      config.perWeather[weatherKind].density = 1;
     }
-    if ((kind === "thunder" || kind === "thunderstorm")
-      && typeof config.perWeather[kind].flash !== "boolean") {
-      config.perWeather[kind].flash = true;
+    if ((weatherKind === "thunder" || weatherKind === "thunderstorm")
+      && typeof config.perWeather[weatherKind].flash !== "boolean") {
+      config.perWeather[weatherKind].flash = true;
     }
-    if ((kind === "cloud" || kind === "cloudy" || kind === "fog" || kind === "haze" || kind === "thunder")
-      && typeof config.perWeather[kind].cloudDrift !== "boolean") {
-      config.perWeather[kind].cloudDrift = true;
+    if ((weatherKind === "cloud" || weatherKind === "cloudy" || weatherKind === "fog" || weatherKind === "haze" || weatherKind === "thunder")
+      && typeof config.perWeather[weatherKind].cloudDrift !== "boolean") {
+      config.perWeather[weatherKind].cloudDrift = true;
     }
-    if ((kind === "cloud" || kind === "cloudy" || kind === "fog" || kind === "haze" || kind === "thunder")
-      && typeof config.perWeather[kind].cloudDriftSpeed !== "number") {
-      config.perWeather[kind].cloudDriftSpeed = 1;
+    if ((weatherKind === "cloud" || weatherKind === "cloudy" || weatherKind === "fog" || weatherKind === "haze" || weatherKind === "thunder")
+      && typeof config.perWeather[weatherKind].cloudDriftSpeed !== "number") {
+      config.perWeather[weatherKind].cloudDriftSpeed = 1;
     }
-    if ((kind === "cloud" || kind === "cloudy" || kind === "fog" || kind === "haze" || kind === "thunder")
-      && typeof config.perWeather[kind].cloudDriftDirection !== "string") {
-      config.perWeather[kind].cloudDriftDirection = "random";
+    if ((weatherKind === "cloud" || weatherKind === "cloudy" || weatherKind === "fog" || weatherKind === "haze" || weatherKind === "thunder")
+      && typeof config.perWeather[weatherKind].cloudDriftDirection !== "string") {
+      config.perWeather[weatherKind].cloudDriftDirection = "random";
     }
-    return config.perWeather[kind];
+    return config.perWeather[weatherKind];
   }
 
   function applyGlobalPatch(patch) {
     if (!patch) return;
     const global = config.global;
     if ("time" in patch) global.time = normalizeString(patch.time, global.time);
-    if ("weather" in patch) global.weather = normalizeString(patch.weather, global.weather);
+    if ("weather" in patch) global.weather = normalizeWeatherKind(patch.weather, global.weather);
     if ("autoTime" in patch) global.autoTime = normalizeBoolean(patch.autoTime, global.autoTime);
     if ("tilt" in patch) global.tilt = normalizeBoolean(patch.tilt, global.tilt);
     if ("tiltX" in patch) global.tiltX = normalizeNumber(patch.tiltX, global.tiltX, 0, 2);
@@ -243,6 +258,7 @@
     constants: {
       AUTO_WEATHER_DEFAULT_MIN,
       WEATHER_KINDS,
+      WEATHER_KIND_ALIASES,
       DPR_LEVELS,
       DEFAULT_GLOBAL,
     },
@@ -250,5 +266,6 @@
     getWeatherConfig,
     applyGlobalPatch,
     getGlobalConfig: () => config.global,
+    normalizeWeatherKind,
   };
 })();

@@ -54,6 +54,8 @@
       this.viewHeight = sizes[1];
       this.color = color;
       this.scale = scale;
+      this.scalePower = Math.pow(scale, 1.5);
+      this.rect = { x: 0, y: 0, w: 0, h: 0 };
       this.speed = this.canvasSize / (1000 * (0.5 + Math.random())) * 6;
       this.maxHeight = 0.007 * this.canvasSize;
       this.minHeight = 0.005 * this.canvasSize;
@@ -73,11 +75,14 @@
     buildRect() {
       const x = this.x - (this.canvasSize - this.viewWidth) * 0.5;
       const y = this.y - (this.canvasSize - this.viewHeight) * 0.5;
-      this.rect = { x, y, w: this.width * this.scale, h: this.height * this.scale };
+      this.rect.x = x;
+      this.rect.y = y;
+      this.rect.w = this.width * this.scale;
+      this.rect.h = this.height * this.scale;
     }
 
     move(interval, deltaRotation3D) {
-      this.x += this.speed * interval * (Math.pow(this.scale, 1.5) + 5 * Math.sin(degToRad(deltaRotation3D)) * Math.cos(degToRad(16)));
+      this.x += this.speed * interval * (this.scalePower + 5 * Math.sin(degToRad(deltaRotation3D)) * Math.cos(degToRad(16)));
       this.y -= this.speed * interval * 5 * Math.sin(degToRad(deltaRotation3D)) * Math.sin(degToRad(16));
       if (this.x >= this.canvasSize) {
         this.init(false);
